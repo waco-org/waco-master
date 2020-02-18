@@ -1,4 +1,7 @@
 ---
+# Workstation as Code
+# Copyright Nicola Musatti 2020.
+
 galaxy_info:
   author: Nicola Musatti
   description: Waco Master role
@@ -24,12 +27,13 @@ galaxy_info:
   # github_branch:
 
   platforms:
-  - name: EL
-    versions:
-    - 8
-    - 7
-  # - name: Fedora
-  #   - all
+    - name: EL
+      versions:
+        - 8
+        - 7
+    - name: Fedora
+      versions:
+        - all
 
   galaxy_tags: []
   # List tags for your role here, one per line. A tag is a keyword that describes
