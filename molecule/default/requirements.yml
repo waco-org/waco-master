@@ -1,0 +1,10 @@
+---
+- src: git@github.com:nmusatti/waco-python.git
+  scm: git
+
+- src: nmusatti.source_python
+
+- src: geerlingguy.repo-epel
+
+- src: bobbyrenwick.pip
+  

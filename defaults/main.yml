@@ -1,2 +1,5 @@
 ---
-# defaults file for waco-master
+# Workstation as Code
+# Copyright Nicola Musatti 2020.
+
+waco_python: false

@@ -3,3 +3,5 @@
   hosts: all
   roles:
     - role: waco-master
+      vars:
+        waco_python: true
