@@ -1,9 +1,12 @@
 ---
 - name: Converge
   hosts: all
+  environment:
+    DOCKER_HOST: unix:///docker.sock
   tasks:
     - name: "Include waco-master"
       include_role:
         name: "waco-master"
       vars:
+        waco_docker: true
         waco_python: true

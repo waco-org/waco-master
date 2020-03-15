@@ -2,6 +2,11 @@
 # Workstation as Code
 # Copyright Nicola Musatti 2020.
 
+- name: Install Docker
+  include_role:
+    name: waco-docker
+  when: waco_docker
+
 - name: Install Python
   include_role:
     name: waco-python

@@ -2,4 +2,5 @@
 # Workstation as Code
 # Copyright Nicola Musatti 2020.
 
+waco_docker: false
 waco_python: false

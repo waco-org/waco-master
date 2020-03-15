@@ -3,5 +3,9 @@
   hosts: all
   environment:
     DOCKER_HOST: unix:///docker.sock
-  roles:
-    - role: waco-docker
+  tasks:
+    - name: "Include waco-master"
+      include_role:
+        name: "waco-master"
+      vars:
+        waco_docker: true
