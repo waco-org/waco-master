@@ -11,3 +11,8 @@
   include_role:
     name: waco-python
   when: waco_python
+
+- name: Install MATE
+  include_role:
+    name: waco-mate
+  when: waco_mate

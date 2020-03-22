@@ -3,4 +3,5 @@
 # Copyright Nicola Musatti 2020.
 
 waco_docker: false
+waco_mate: false
 waco_python: false
