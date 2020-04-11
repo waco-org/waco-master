@@ -21,6 +21,12 @@ def test_docker(host):
     assert res.rc == 0
 
 
+def test_docker_compose(host):
+    res = host.run('/usr/local/bin/docker-compose --version')
+
+    assert res.rc == 0
+
+
 def test_python3(host):
     host.check_output('/usr/bin/python3 --version').find('3') > -1
 

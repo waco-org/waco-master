@@ -19,3 +19,9 @@ def test_docker(host):
     res = host.run('docker run hello-world')
 
     assert res.rc == 0
+
+
+def test_docker_compose(host):
+    res = host.run('/usr/local/bin/docker-compose --version')
+
+    assert res.rc == 0
