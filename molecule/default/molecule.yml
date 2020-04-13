@@ -22,3 +22,4 @@ provisioner:
   name: ansible
 verifier:
   name: testinfra
+  directory: ../resources/tests/default

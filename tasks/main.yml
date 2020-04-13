@@ -4,7 +4,7 @@
 
 - name: Install Docker
   include_role:
-    name: waco-docker
+    name: nmusatti.docker_ce
   when: waco_docker
 
 - name: Install Python

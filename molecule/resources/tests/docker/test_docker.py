@@ -21,7 +21,28 @@ def test_docker(host):
     assert res.rc == 0
 
 
-def test_docker_compose(host):
-    res = host.run('/usr/local/bin/docker-compose --version')
+_compose = '''
+---
+version: "2"
+services:
+  hello:
+    image: hello-world
 
+'''
+
+
+def test_docker_compose(host):
+    f = host.file('/usr/bin/docker-compose')
+    assert not f.exists
+
+    res = host.run('/usr/local/bin/docker-compose --version')
     assert res.rc == 0
+
+    res = host.run("echo '{}' > /tmp/docker-compose.yml".format(_compose))
+    assert res.rc == 0
+
+    res1 = host.run(
+        '/usr/local/bin/docker-compose -f /tmp/docker-compose.yml up')
+    res2 = host.run(
+        '/usr/local/bin/docker-compose -f /tmp/docker-compose.yml down')
+    assert res1.rc == 0 and res2.rc == 0

@@ -1,12 +1,11 @@
 ---
-- src: git@github.com:nmusatti/waco-docker.git
-  scm: git
-
 - src: git@github.com:nmusatti/waco-mate.git
   scm: git
 
 - src: git@github.com:nmusatti/waco-python.git
   scm: git
+
+- src: nmusatti.docker_ce
 
 - src: nmusatti.source_python
 
