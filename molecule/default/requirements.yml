@@ -1,0 +1,4 @@
+---
+- src: geerlingguy.repo-epel
+
+- src: nmusatti.docker_ce
