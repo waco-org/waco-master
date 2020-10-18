@@ -1,0 +1,33 @@
+---
+# Workstation as Code
+# Copyright Nicola Musatti 2020.
+
+- name: Install flatpak (CentOS 8, Fedora)
+  dnf:
+    name: flatpak
+  become: true
+  when: waco_platform == 'CentOS8' or waco_platform == 'Fedora'
+
+- name: Install system packages (CentOS 7)
+  yum:
+    name: flatpak
+  become: true
+  when: waco_platform == 'CentOS7'
+
+- name: Add a flatpak repository remote
+  community.general.flatpak_remote:
+    name: "{{ flatpak_remote }}"
+    state: present
+    flatpakrepo_url: "{{ flatpak_url }}"
+    method: "{{ flatpak_method }}"
+  become: true
+  become_user: "{{ ( flatpak_method == 'system' ) | ternary('root', flatpak_user) }}"
+
+- name: Install flatpaks from a remote
+  community.general.flatpak:
+    name: "{{ item }}"
+    state: present
+    remote: "{{ flatpak_remote }}"
+  become: true
+  become_user: "{{ ( flatpak_method == 'system' ) | ternary('root', flatpak_user) }}"
+  loop: "{{ flatpak_apps }}"

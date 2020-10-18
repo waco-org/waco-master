@@ -1,3 +1,6 @@
 ---
 # Workstation as Code
 # Copyright Nicola Musatti 2020.
+
+waco_platform: "{{ ansible_distribution }}{{ 
+( ansible_distribution == 'CentOS' ) | ternary(ansible_distribution_major_version, '') }}"

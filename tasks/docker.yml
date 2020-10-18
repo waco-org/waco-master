@@ -1,0 +1,32 @@
+---
+# Workstation as Code
+# Copyright Nicola Musatti 2020.
+
+- name: Set compose version
+  set_fact:
+    docker_compose_version: "{{ wado_compose_version }}"
+  when: wado_compose_version is defined
+
+- name: Install Docker
+  include_role:
+    name: nmusatti.docker_ce
+
+- name: Create the docker user with userid 1000
+  user:
+    name: "{{ waco_docker_user }}"
+    group: docker
+    state: present
+    password: '*'
+    uid: 1000
+  ignore_errors: true
+  register: docker_user
+  become: true
+
+- name: Create the docker user with a different userid
+  user:
+    name: "{{ waco_docker_user }}"
+    group: docker
+    state: present
+    password: '*'
+  become: true
+  when: docker_user is failed

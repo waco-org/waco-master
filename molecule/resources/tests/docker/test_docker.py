@@ -21,6 +21,10 @@ def test_docker(host):
     assert res.rc == 0
 
 
+def test_docker_user(host):
+    assert host.user("docker").exists
+
+
 _compose = '''
 ---
 version: "2"
