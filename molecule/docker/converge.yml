@@ -8,4 +8,5 @@
       include_role:
         name: "waco-master"
       vars:
-        waco_docker: true
+        waco_has_docker: true
+        wado_compose_version: 1.26.2

@@ -8,4 +8,4 @@
       include_role:
         name: "waco-master"
       vars:
-        waco_mate: true
+        waco_has_mate: true

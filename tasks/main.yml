@@ -5,14 +5,14 @@
 - name: Install Docker
   include_role:
     name: nmusatti.docker_ce
-  when: waco_docker
+  when: waco_has_docker
 
 - name: Install Python
   include_role:
     name: waco-python
-  when: waco_python
+  when: waco_has_python
 
 - name: Install MATE
   include_role:
     name: waco-mate
-  when: waco_mate
+  when: waco_has_mate

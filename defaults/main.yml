@@ -2,6 +2,18 @@
 # Workstation as Code
 # Copyright Nicola Musatti 2020.
 
-waco_docker: false
-waco_mate: false
-waco_python: false
+# General settings
+waco_install_dir: /opt
+waco_software_dir: /sw
+
+# Docker
+waco_has_docker: false
+
+# Mate
+waco_has_mate: false
+
+# Python
+waco_has_python: false
+wapy_install_root_dir: "{{ waco_install_dir }}"
+wapy_source_venv_root_dir: "{{ waco_install_dir }}"
+wapy_system_venv_root_dir: "{{ waco_install_dir }}"
