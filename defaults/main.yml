@@ -13,6 +13,9 @@ waco_has_docker: false
 waco_docker_user: docker
 waco_docker_uid: 1000
 
+# grsync
+waco_has_grsync: false
+
 # Mate
 waco_has_mate: false
 
@@ -21,3 +24,18 @@ waco_has_python: false
 wapy_install_root_dir: "{{ waco_install_dir }}"
 wapy_source_venv_root_dir: "{{ waco_install_dir }}"
 wapy_system_venv_root_dir: "{{ waco_install_dir }}"
+
+# Virtualbox
+waco_has_virtualbox: false
+wavb_release: "6.1"
+wavb_package: ""
+
+# Visual Studio Code
+waco_has_vscode: false
+
+# User settings
+waco_users: []
+waco_user_settings: {}
+waco_user_defaults:
+  has_rust: false
+  flatpak_apps: []

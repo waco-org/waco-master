@@ -4,3 +4,5 @@
 
 waco_platform: "{{ ansible_distribution }}{{ 
 ( ansible_distribution == 'CentOS' ) | ternary(ansible_distribution_major_version, '') }}"
+wavb_distro: "{{ ( waco_platform in ( 'CentOS8', 'CentOS7' ) ) | ternary('el', 'fedora') }}"
+wavb_version: "{{ wavb_release + ( ( wavb_package != '' ) | ternary('.' + wavb_package, '') ) }}"

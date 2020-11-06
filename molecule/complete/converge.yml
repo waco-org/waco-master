@@ -14,7 +14,16 @@
           - io.github.quodlibet.QuodLibet
         waco_has_docker: true
         wado_compose_version: 1.26.2
+        waco_has_grsync: true
         waco_has_mate: true
         waco_has_python: true
         wapy_source_versions:
           - 3.7.9
+        waco_has_virtualbox: true
+        waco_has_vscode: true
+        waco_users: [ "user" ]
+        waco_user_settings:
+          user:
+            has_rust: true
+            flatpak_apps:
+              - org.musicbrainz.Picard

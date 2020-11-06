@@ -42,3 +42,31 @@
     flatpak_method: system
     flatpak_apps: "{{ waco_flatpak_apps }}"
   when: waco_flatpak_apps | length > 0
+
+- name: Install grsync
+  include_tasks:
+    file: grsync.yml
+  vars:
+  when: waco_has_grsync
+
+- name: Install VirtualBox
+  include_tasks:
+    file: virtualbox.yml
+  vars:
+  when: waco_has_virtualbox
+
+- name: Install Visual Studio Code
+  include_tasks:
+    file: vscode.yml
+  vars:
+  when: waco_has_vscode
+
+- name: Install user specific components
+  include_tasks:
+    file: user.yml
+  vars:
+    user: "{{ item }}"
+    dict: "{{ waco_user_settings[item] | default(waco_user_defaults) }}"
+    user_has_rust: "{{ dict['has_rust'] | default(waco_user_defaults['has_rust']) }}"
+    user_flatpak_apps: "{{ dict['flatpak_apps'] | default(waco_user_defaults['flatpak_apps']) }}"
+  loop: "{{ waco_users }}"

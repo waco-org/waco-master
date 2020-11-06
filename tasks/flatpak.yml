@@ -25,9 +25,11 @@
 
 - name: Install flatpaks from a remote
   community.general.flatpak:
-    name: "{{ item }}"
+    name: "{{ flatpak_app }}"
     state: present
     remote: "{{ flatpak_remote }}"
   become: true
   become_user: "{{ ( flatpak_method == 'system' ) | ternary('root', flatpak_user) }}"
   loop: "{{ flatpak_apps }}"
+  loop_control:
+    loop_var: flatpak_app

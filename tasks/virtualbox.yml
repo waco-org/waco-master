@@ -1,0 +1,49 @@
+---
+# Workstation as Code
+# Copyright Nicola Musatti 2020.
+
+- name: "Install the required packages (CentOS 8, Fedora)"
+  dnf:
+    name: "{{ packages }}"
+  vars:
+    packages:
+      - yum-utils
+  become: true
+  when: waco_platform in ( 'CentOS8', 'Fedora' )
+
+- name: "Install the required packages (CentOS 7)"
+  yum:
+    name: "{{ packages }}"
+  vars:
+    packages:
+      - yum-utils
+  become: true
+  when: waco_platform == 'CentOS7'
+
+- name: Check if the official VirtualBox repository is available
+  stat:
+    path: /etc/yum.repos.d/virtualbox.repo
+  register: virtualbox_repo
+
+- name: Install the official VirtualBox repository
+  command: "yum-config-manager --add-repo https://download.virtualbox.org/virtualbox/rpm/{{ wavb_distro }}/virtualbox.repo"
+  become: true
+  when: virtualbox_repo.stat.exists is defined and not virtualbox_repo.stat.exists
+
+- name: "Install VirtualBox (CentOS 8, Fedora)"
+  dnf:
+    name: "{{ packages }}"
+  vars:
+    packages:
+      - "VirtualBox-{{ wavb_version }}"
+  become: true
+  when: waco_platform in ( 'CentOS8', 'Fedora' )
+
+- name: "Install VirtualBox (CentOS 7)"
+  yum:
+    name: "{{ packages }}"
+  vars:
+    packages:
+      - "VirtualBox-{{ wavb_version }}"
+  become: true
+  when: waco_platform == 'CentOS7'

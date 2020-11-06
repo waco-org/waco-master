@@ -1,0 +1,42 @@
+---
+# Workstation as Code
+# Copyright Nicola Musatti 2020.
+
+- name: Check if the official VS Code repository is available
+  stat:
+    path: /etc/yum.repos.d/vscode.repo
+  register: vscode_repo
+
+- name: Copy the VS Code repo file
+  copy:
+    src: vscode.repo
+    dest: /tmp
+    mode: 0644
+    owner: root
+    group: root
+  become: true
+  register: vscode_file
+  when: vscode_repo.stat.exists is defined and not vscode_repo.stat.exists
+
+- name: Install the official VS Code repository
+  command: "yum-config-manager --add-repo /tmp/vscode.repo"
+  become: true
+  when: vscode_file is changed
+
+- name: "Install VS Code (CentOS 8, Fedora)"
+  dnf:
+    name: "{{ packages }}"
+  vars:
+    packages:
+      - code
+  become: true
+  when: waco_platform in ( 'CentOS8', 'Fedora' )
+
+- name: "Install VS Code (CentOS 7)"
+  yum:
+    name: "{{ packages }}"
+  vars:
+    packages:
+      - code
+  become: true
+  when: waco_platform == 'CentOS7'
