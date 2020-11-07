@@ -11,7 +11,7 @@
         waco_packages:
           - vim-X11
         waco_flatpak_apps:
-          - io.github.quodlibet.QuodLibet
+          - org.musicbrainz.Picard
         waco_has_docker: true
         wado_compose_version: 1.26.2
         waco_has_grsync: true
@@ -26,4 +26,4 @@
           user:
             has_rust: true
             flatpak_apps:
-              - org.musicbrainz.Picard
+              - io.github.quodlibet.QuodLibet

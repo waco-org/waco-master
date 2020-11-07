@@ -6,7 +6,7 @@
   dnf:
     name: flatpak
   become: true
-  when: waco_platform == 'CentOS8' or waco_platform == 'Fedora'
+  when: waco_platform in ( 'CentOS8', 'Fedora' )
 
 - name: Install system packages (CentOS 7)
   yum:
@@ -28,6 +28,7 @@
     name: "{{ flatpak_app }}"
     state: present
     remote: "{{ flatpak_remote }}"
+    method: "{{ flatpak_method }}"
   become: true
   become_user: "{{ ( flatpak_method == 'system' ) | ternary('root', flatpak_user) }}"
   loop: "{{ flatpak_apps }}"

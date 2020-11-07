@@ -16,8 +16,25 @@ def test_system_package(host):
 
 
 def test_flatpak_system(host):
-    f = host.file('/var/lib/flatpak/app/io.github.quodlibet.QuodLibet')
+    f = host.file('/var/lib/flatpak/app/org.musicbrainz.Picard')
 
     assert f.is_directory
     assert f.user == 'root'
     assert f.group == 'root'
+
+
+def test_flatpak_user(host):
+    f = host.file('/home/user/.local/share/flatpak/app/'
+                  'io.github.quodlibet.QuodLibet')
+
+    assert f.is_directory
+    assert f.user == 'user'
+    assert f.group == 'user'
+
+
+def test_rust_user(host):
+    f = host.file('/home/user/.cargo/bin/rustc')
+
+    assert f.exists
+    assert f.user == 'user'
+    assert f.group == 'user'
