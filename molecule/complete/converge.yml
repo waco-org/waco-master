@@ -15,6 +15,7 @@
         waco_has_docker: true
         wado_compose_version: 1.26.2
         waco_has_grsync: true
+        waco_has_maven: true
         waco_has_mate: true
         waco_has_python: true
         wapy_source_versions:

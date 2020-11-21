@@ -30,11 +30,3 @@ def test_flatpak_user(host):
     assert f.is_directory
     assert f.user == 'user'
     assert f.group == 'user'
-
-
-def test_rust_user(host):
-    f = host.file('/home/user/.cargo/bin/rustc')
-
-    assert f.exists
-    assert f.user == 'user'
-    assert f.group == 'user'
