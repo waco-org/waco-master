@@ -19,6 +19,10 @@ waco_has_grsync: false
 # Mate
 waco_has_mate: false
 
+# Apache Maven
+waco_has_maven: false
+wamvn_version: 3.6.3
+
 # Python
 waco_has_python: false
 wapy_install_root_dir: "{{ waco_install_dir }}"

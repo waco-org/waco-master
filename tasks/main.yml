@@ -2,6 +2,16 @@
 # Workstation as Code
 # Copyright Nicola Musatti 2020.
 
+- name: Enable the EPEL repository
+  include_role:
+    name: geerlingguy.repo-epel
+  when: waco_platform != 'Fedora'
+
+- name: Enable the PowerTools repository (CentOS 8)
+  include_tasks:
+    file: powertools.yml
+  when: waco_platform == 'CentOS8' and ( waco_has_grsync or waco_has_mate )
+
 - name: Install Docker
   include_tasks:
     file: docker.yml
@@ -42,6 +52,12 @@
     flatpak_method: system
     flatpak_apps: "{{ waco_flatpak_apps }}"
   when: waco_flatpak_apps | length > 0
+
+- name: Install Maven
+  include_tasks:
+    file: maven.yml
+  vars:
+  when: waco_has_maven
 
 - name: Install grsync
   include_tasks:

@@ -1,0 +1,49 @@
+---
+# Workstation as Code
+# Copyright Nicola Musatti 2020.
+
+- name: Install system packages for Maven (CentOS 8, Fedora)
+  dnf:
+    name: "{{ packages }}"
+  vars:
+    packages:
+      - unzip
+  become: true
+  when: waco_platform == 'CentOS8' or waco_platform == 'Fedora'
+
+- name: Install system packages for Maven (CentOS 7)
+  yum:
+    name: "{{ packages }}"
+  vars:
+    packages:
+      - unzip
+  become: true
+  when: waco_platform == 'CentOS7'
+
+- name: "Create base directories for Maven"
+  file:
+    dest: "{{ item }}"
+    state: directory
+    mode: 0755
+  become: true
+  loop:
+    - "{{ waco_install_dir }}"
+    - "{{ waco_software_dir }}"
+    - "{{ waco_software_dir }}/maven"
+
+- name: Download the Maven archive
+  get_url:
+    dest: "{{ waco_software_dir }}/maven"
+    url: "https://archive.apache.org/dist/maven/maven-3/{{ wamvn_version }}/binaries/apache-maven-{{ wamvn_version }}-bin.zip"
+    mode: 0644
+  become: true
+  retries: 3
+  delay: 3
+
+- name: Unpack the Maven archive
+  unarchive:
+    src: "{{ waco_software_dir }}/maven/apache-maven-{{ wamvn_version }}-bin.zip"
+    dest: "/opt"
+    mode: 0755
+    remote_src: true
+  become: true
