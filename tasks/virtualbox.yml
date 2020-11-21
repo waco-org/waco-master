@@ -38,6 +38,7 @@
       - "VirtualBox-{{ wavb_version }}"
   become: true
   when: waco_platform in ( 'CentOS8', 'Fedora' )
+  register: virtualbox_installed
 
 - name: "Install VirtualBox (CentOS 7)"
   yum:
@@ -47,3 +48,9 @@
       - "VirtualBox-{{ wavb_version }}"
   become: true
   when: waco_platform == 'CentOS7'
+  register: virtualbox_installed
+
+- name: Disable the official VirtualBox repository
+  command: "yum-config-manager --disable virtualbox.repo"
+  become: true
+  when: virtualbox_installed is changed
