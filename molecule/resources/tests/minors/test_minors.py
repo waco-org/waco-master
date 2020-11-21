@@ -23,6 +23,12 @@ def test_maven(host):
     assert f.group == 'root'
 
 
+def test_packer(host):
+    res = host.run('packer -version')
+
+    assert res.rc == 0
+
+
 def test_virtualbox(host):
     res = host.run('vboxmanage --version')
 

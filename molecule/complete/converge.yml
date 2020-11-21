@@ -17,6 +17,7 @@
         waco_has_grsync: true
         waco_has_maven: true
         waco_has_mate: true
+        waco_has_packer: true
         waco_has_python: true
         wapy_source_versions:
           - 3.7.9
