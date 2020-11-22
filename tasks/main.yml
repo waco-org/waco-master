@@ -55,11 +55,17 @@
   vars:
   when: waco_has_maven
 
-- name: Install packer
+- name: Install Packer
   include_tasks:
     file: packer.yml
   vars:
   when: waco_has_packer
+
+- name: Install Vagrant
+  include_tasks:
+    file: vagrant.yml
+  vars:
+  when: waco_has_vagrant
 
 - name: Install VirtualBox
   include_tasks:

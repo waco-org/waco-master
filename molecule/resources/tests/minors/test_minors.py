@@ -29,6 +29,13 @@ def test_packer(host):
     assert res.rc == 0
 
 
+def test_vagrant(host):
+    res1 = host.run('vagrant --version')
+    res2 = host.run('/opt/bin/vagrant --version')
+
+    assert res1.rc == 0 or res2.rc == 0
+
+
 def test_virtualbox(host):
     res = host.run('vboxmanage --version')
 
