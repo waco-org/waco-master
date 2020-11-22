@@ -24,7 +24,7 @@ platforms:
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
   - name: fedora
-    image: nmusatti/fedora-pys-systemd
+    image: nmusatti/fedora-pys-systemd:32
     command: /sbin/init
     pre_build_image: true
     privileged: True
