@@ -25,6 +25,7 @@ wamvn_version: 3.6.3
 
 # Packer
 waco_has_packer: false
+wapa_disable_repo: true
 
 # Python
 waco_has_python: false
@@ -32,10 +33,15 @@ wapy_install_root_dir: "{{ waco_install_dir }}"
 wapy_source_venv_root_dir: "{{ waco_install_dir }}"
 wapy_system_venv_root_dir: "{{ waco_install_dir }}"
 
+# Vagrant
+waco_has_vagrant: false
+wava_version: 2.2.14
+
 # Virtualbox
 waco_has_virtualbox: false
-wavb_release: "6.1"
+wavb_release: 6.1
 wavb_package: ""
+wavb_disable_repo: true
 
 # Visual Studio Code
 waco_has_vscode: false
