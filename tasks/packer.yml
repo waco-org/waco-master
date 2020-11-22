@@ -53,4 +53,4 @@
 - name: Disable the official Packer repository
   command: "yum-config-manager --disable packer.repo"
   become: true
-  when: packer_installed is changed
+  when: packer_installed is changed and wapa_disable_repo

@@ -23,12 +23,12 @@
 - name: Check if the official VirtualBox repository is available
   stat:
     path: /etc/yum.repos.d/virtualbox.repo
-  register: virtualbox_repo
+  register: wavb_repo
 
 - name: Install the official VirtualBox repository
   command: "yum-config-manager --add-repo https://download.virtualbox.org/virtualbox/rpm/{{ wavb_distro }}/virtualbox.repo"
   become: true
-  when: virtualbox_repo.stat.exists is defined and not virtualbox_repo.stat.exists
+  when: wavb_repo.stat.exists is defined and not wavb_repo.stat.exists
 
 - name: "Install VirtualBox (CentOS 8, Fedora)"
   dnf:
@@ -38,7 +38,7 @@
       - "VirtualBox-{{ wavb_version }}"
   become: true
   when: waco_platform in ( 'CentOS8', 'Fedora' )
-  register: virtualbox_installed
+  register: wavb_installed
 
 - name: "Install VirtualBox (CentOS 7)"
   yum:
@@ -48,9 +48,9 @@
       - "VirtualBox-{{ wavb_version }}"
   become: true
   when: waco_platform == 'CentOS7'
-  register: virtualbox_installed
+  register: wavb_installed
 
 - name: Disable the official VirtualBox repository
   command: "yum-config-manager --disable virtualbox.repo"
   become: true
-  when: virtualbox_installed is changed
+  when: wavb_installed is changed and wavb_disable_repo
