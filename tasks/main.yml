@@ -17,6 +17,16 @@
     name: waco-mate
   when: waco_has_mate
 
+- name: Enable the EPEL repository (CentOS 8, CentOS7)
+  include_role:
+    name: geerlingguy.repo-epel
+  when: waco_platform in ( 'CentOS8', 'CentOS7' )
+
+- name: Enable the PowerTools repository (CentOS 8)
+  include_tasks:
+    file: powertools.yml
+  when: waco_platform == 'CentOS8'
+
 - name: Install system packages (CentOS 8, Fedora)
   dnf:
     name: "{{ packages }}"
