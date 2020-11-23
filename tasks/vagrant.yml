@@ -12,17 +12,6 @@
     - "{{ waco_software_dir }}"
     - "{{ waco_software_dir }}/vagrant"
 
-# - name: Create install directories for Vagrant (Fedora)
-#   file:
-#     dest: "{{ item }}"
-#     state: directory
-#     mode: 0755
-#   become: true
-#   loop:
-#     - "{{ waco_install_dir }}"
-#     - "{{ waco_install_dir }}/bin"
-#   when: waco_platform in ( 'Fedora' )
-
 - name: Download the Vagrant package
   get_url:
     dest: "{{ waco_software_dir }}/vagrant"
@@ -31,17 +20,6 @@
   become: true
   retries: 3
   delay: 3
-  # when: waco_platform in ( 'CentOS8', 'CentOS7' )
-
-# - name: Download the Vagrant package (Fedora)
-#   get_url:
-#     dest: "{{ waco_software_dir }}/vagrant"
-#     url: "https://releases.hashicorp.com/vagrant/{{ wava_version }}/vagrant_{{ wava_version }}_linux_amd64.zip"
-#     mode: 0644
-#   become: true
-#   retries: 3
-#   delay: 3
-#   when: waco_platform in ( 'Fedora' )
 
 - name: "Install Vagrant (CentOS 8, Fedora)"
   dnf:
@@ -55,12 +33,3 @@
     name: "{{ waco_software_dir }}/vagrant/vagrant_{{ wava_version }}_x86_64.rpm"
   become: true
   when: waco_platform == 'CentOS7'
-
-# - name: "Install Vagrant (Fedora)"
-#   unarchive:
-#     src: "{{ waco_software_dir }}/vagrant/vagrant_{{ wava_version }}_linux_amd64.zip"
-#     dest: "{{ waco_install_dir }}/bin"
-#     mode: 0755
-#     remote_src: true
-#   become: true
-#   when: waco_platform in ( 'Fedora' )
