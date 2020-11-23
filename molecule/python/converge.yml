@@ -9,3 +9,4 @@
         waco_has_python: true
         wapy_source_versions:
           - 3.7.9
+          - 2.7.18
