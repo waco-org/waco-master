@@ -7,6 +7,7 @@
     name: "{{ user }}"
     state: present
     password: '*'
+    update_password: on_create
   become: true
 
 - name: "Install user flatpak apps for user {{ user }}"
