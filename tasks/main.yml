@@ -42,7 +42,7 @@
 
 - name: Install MATE
   include_role:
-    name: waco-mate
+    name: nmusatti.mate_desktop
   when: waco_has_mate
 
 - name: Install system packages (CentOS 8, Fedora)

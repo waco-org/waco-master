@@ -1,2 +1,4 @@
 ---
 - src: geerlingguy.repo-epel
+
+- src: nmusatti.mate_desktop
