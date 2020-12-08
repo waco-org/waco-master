@@ -4,6 +4,8 @@
 
 waco_platform: "{{ ansible_distribution }}{{ 
 ( ansible_distribution == 'CentOS' ) | ternary(ansible_distribution_major_version, '') }}"
+waco_powertools_file: "{{ ( ansible_distribution_version in ( '8.2', '8.1', '8.0', '8' ) ) | ternary('CentOS-PowerTools.repo', 'CentOS-Linux-PowerTools.repo') }}"
+waco_powertools_name: "{{ ( ansible_distribution_version in ( '8.2', '8.1', '8.0', '8' ) ) | ternary('PowerTools', 'powertools') }}"
 wavb_distro: "{{ ( waco_platform in ( 'CentOS8', 'CentOS7' ) ) | ternary('el', 'fedora') }}"
 wavb_version: "{{ ( wavb_release | string ) + ( ( wavb_package != '' ) | ternary('-' + wavb_package, '') ) }}"
 waco_hashi_distro: "{{ ( waco_platform in ( 'CentOS8', 'CentOS7' ) ) | ternary('RHEL', 'fedora') }}"
