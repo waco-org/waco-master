@@ -1,48 +1,78 @@
-Role Name
-=========
+waco_master
+===========
 
-A brief description of the role goes here.
+An Ansible role that orchestrates the installation of several developer oriented tools by driving
+other roles. Currently only Red Hat open distributions are supported, i.e. CentOS 8, CentOS 7 and
+Fedora 32. Fedora 33 is not fully supported because at the time of writing not all of the tools
+handled by this role were available on that release. RHEL 8 and 7 are not tested, but should work
+without problems.
+
+The currently supported tools and applications are:
+
+- Docker Community Edition
+- Python, from either source or system packages, and within virtualenv's:
+
+    + Ansible
+    + Mercurial
+    + Sphinx
+
+- The MATE desktop
+- Flatpak and flatpak applications, both system and user level
+- Grsync
+- Apache Maven
+- Hashicorp Packer
+- Hashicorp Vagrant
+- Oracle VirtualBox
+- Visual Studio Code
+- Rust, per user
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should
-be mentioned here. For instance, if the role uses the EC2 module, it may be a
-good idea to mention in this section that the boto package is required.
+None.
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including
-any variables that are in defaults/main.yml, vars/main.yml, and any variables
-that can/should be set via parameters to the role. Any variables that are read
-from other roles and/or the global scope (ie. hostvars, group vars, etc.) should
-be mentioned here as well.
+There are many variables that control the operation of this role, they are documented in the
+`defaults/main.yml` file.
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in
-regards to parameters that may need to be set for other roles, or variables that
-are used from other roles.
+The `nmusatti.docker_ce` role is used to install Docker Community Edition.
+
+The `nmusatti.source_python` role is used to install Python from source.
+
+The `nmusatti.waco_python` is used to customize Python installations.
+
+The `geerlingguy.repo-epel` role is used to enable the EPEL repository on CentOS.
+
+The `bobbyrenwick.pip` role is used to install pip.
+
+The `nmusatti.mate_desktop` role is used to install the MATE Desktop.
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables
-passed in as parameters) is always nice for users too:
+Consider using the [waco-bootstrap](https://github.com/waco-org/waco-bootstrap.git) project to apply
+the `waco-master` role to newly installed computers. Otherwise you can invoke it directly, in
+which case you might want to copy and customize the [defaults/main.yml](https:defaults/main.yml)
+file, and pass it as a variable file:
 
     - hosts: servers
       roles:
-         - { role: waco-master, x: 42 }
+         - role: nmusatti.waco_master
+           vars_file: my_defaults.yml
 
 License
 -------
 
-BSD
+GPLv3
 
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a
-website (HTML is not allowed).
+Nicola Musatti - <https://github.com/nmusatti>
+
+WACO - Workstation as Code - <https://github.com/waco-org>
