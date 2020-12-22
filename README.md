@@ -35,7 +35,7 @@ Role Variables
 --------------
 
 There are many variables that control the operation of this role, they are documented in the
-`defaults/main.yml` file.
+[defaults/main.yml](https:defaults/main.yml) file.
 
 Dependencies
 ------------
@@ -57,8 +57,8 @@ Example Playbook
 
 Consider using the [waco-bootstrap](https://github.com/waco-org/waco-bootstrap.git) project to apply
 the `waco-master` role to newly installed computers. Otherwise you can invoke it directly, in
-which case you might want to copy and customize the [defaults/main.yml](https:defaults/main.yml)
-file, and pass it as a variable file:
+which case you might want to copy and customize the `defaults/main.yml` file, and pass it as a
+variable file:
 
     - hosts: servers
       roles:
