@@ -44,7 +44,9 @@ The `nmusatti.docker_ce` role is used to install Docker Community Edition.
 
 The `nmusatti.source_python` role is used to install Python from source.
 
-The `nmusatti.waco_python` is used to customize Python installations.
+The `nmusatti.waco_python` is used to customize Python installations. Note that the
+`waco_python` role is not currently available from Ansible Galaxy and must be downloaded from its
+[GitHub repository](https://github.com/waco-org/waco-python.git).
 
 The `geerlingguy.repo-epel` role is used to enable the EPEL repository on CentOS.
 
@@ -64,6 +66,9 @@ variable file:
       roles:
          - role: nmusatti.waco_master
            vars_file: my_defaults.yml
+
+> Note: Currently I cannot upload this role to Ansible Galaxy, so you need to download it from
+> GitHub.
 
 License
 -------
