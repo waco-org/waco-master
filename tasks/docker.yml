@@ -15,9 +15,8 @@
   user:
     name: "{{ waco_docker_user }}"
     group: docker
-    state: present
-    password: '*'
-    update_password: on_create
+    # password: '*'
+    # update_password: on_create
     uid: 1000
   ignore_errors: true
   register: docker_user
