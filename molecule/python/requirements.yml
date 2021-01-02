@@ -1,5 +1,5 @@
 ---
-- src: git@github.com:nmusatti/waco-python.git
+- src: https://github.com/waco-org/waco-python.git
   scm: git
 
 - src: nmusatti.source_python
