@@ -1,2 +1,8 @@
 ---
-# handlers file for waco-master
+# Workstation as Code
+# Copyright Nicola Musatti 2021.
+
+- name: Install the official VS Code repository
+  command: "yum-config-manager --add-repo /tmp/vscode.repo"
+  become: true
+  # when: vscode_file is changed

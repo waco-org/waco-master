@@ -12,7 +12,7 @@
   delay: 3
 
 - name: Execute the Rust installation script
-  shell:
+  command:
     cmd: "/tmp/rustup.sh -y"
     executable: "/usr/bin/sh"
     creates: "/home/{{ user }}/.cargo/bin/rustup"
