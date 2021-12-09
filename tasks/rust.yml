@@ -1,6 +1,6 @@
 ---
 # Workstation as Code
-# Copyright Nicola Musatti 2020.
+# Copyright Nicola Musatti 2020 - 2021.
 
 - name: Download the Rust installation script
   get_url:
@@ -13,8 +13,7 @@
 
 - name: Execute the Rust installation script
   command:
-    cmd: "/tmp/rustup.sh -y"
-    executable: "/usr/bin/sh"
+    cmd: "/usr/bin/sh /tmp/rustup.sh -y"
     creates: "/home/{{ user }}/.cargo/bin/rustup"
   become: true
   become_user: "{{ user }}"
