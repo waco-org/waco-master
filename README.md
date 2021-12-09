@@ -3,9 +3,10 @@ waco_master
 
 An Ansible role that orchestrates the installation of several developer oriented tools by driving
 other roles. Currently only Red Hat open distributions are supported, i.e. CentOS 8, CentOS 7 and
-Fedora 32. Fedora 33 is not fully supported because at the time of writing not all of the tools
-handled by this role were available on that release. RHEL 8 and 7 are not tested, but should work
-without problems.
+Fedora 32. Fedora 33 or later are not fully supported because at the time of writing not all of the
+tools handled by this role were available on those releases. Neither RHEL 8 and 7 nor other 
+derivatives were tested, but they should work without problems. Centos Stream variants are not
+supported.
 
 The currently supported tools and applications are:
 
@@ -16,7 +17,6 @@ The currently supported tools and applications are:
     + Mercurial
     + Sphinx
 
-- The MATE desktop
 - Flatpak and flatpak applications, both system and user level
 - Grsync
 - Apache Maven
@@ -51,8 +51,6 @@ The `nmusatti.waco_python` is used to customize Python installations. Note that 
 The `geerlingguy.repo-epel` role is used to enable the EPEL repository on CentOS.
 
 The `bobbyrenwick.pip` role is used to install pip.
-
-The `nmusatti.mate_desktop` role is used to install the MATE Desktop.
 
 Example Playbook
 ----------------
