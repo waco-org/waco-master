@@ -1,6 +1,6 @@
 ---
 # Workstation as Code
-# Copyright Nicola Musatti 2020.
+# Copyright Nicola Musatti 2020 - 2021.
 
 - name: Install deltarpm support (CentOS8, Fedora)
   dnf:
@@ -39,11 +39,6 @@
   include_role:
     name: waco-python
   when: waco_has_python
-
-- name: Install MATE
-  include_role:
-    name: nmusatti.mate_desktop
-  when: waco_has_mate
 
 - name: Install system packages (CentOS 8, Fedora)
   dnf:

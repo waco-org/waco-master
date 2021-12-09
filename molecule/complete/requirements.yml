@@ -4,8 +4,6 @@
 
 - src: nmusatti.docker_ce
 
-- src: nmusatti.mate_desktop
-
 - src: nmusatti.source_python
 
 - src: geerlingguy.repo-epel

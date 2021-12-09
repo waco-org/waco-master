@@ -1,6 +1,6 @@
 ---
 # Workstation as Code
-# Copyright Nicola Musatti 2020.
+# Copyright Nicola Musatti 2020 - 2021.
 
 
 # General settings
@@ -33,9 +33,6 @@ waco_docker_uid: 1000
 
 # grsync
 waco_has_grsync: false
-
-# Mate
-waco_has_mate: false
 
 # Apache Maven
 waco_has_maven: false
