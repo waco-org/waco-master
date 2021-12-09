@@ -15,15 +15,13 @@
     owner: root
     group: root
   become: true
-  # register: vscode_file
-  notify:
-    - Install the official VS Code repository
+  register: vscode_file
   when: vscode_repo.stat.exists is defined and not vscode_repo.stat.exists
 
-# - name: Install the official VS Code repository
-#   command: "yum-config-manager --add-repo /tmp/vscode.repo"
-#   become: true
-#   when: vscode_file is changed
+- name: Install the official VS Code repository
+  command: "yum-config-manager --add-repo /tmp/vscode.repo"
+  become: true
+  when: vscode_file is changed
 
 - name: "Install VS Code (CentOS 8, Fedora)"
   dnf:
