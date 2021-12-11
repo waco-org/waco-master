@@ -36,7 +36,7 @@ waco_has_grsync: false
 
 # Apache Maven
 waco_has_maven: false
-wamvn_version: 3.6.3
+wamvn_version: 3.8.4
 
 
 # Packer
@@ -64,7 +64,7 @@ wapy_system_venv_root_dir: "{{ waco_install_dir }}"
 waco_has_vagrant: false
 
 # The required Vagrant release
-wava_version: 2.2.14
+wava_version: 2.2.19
 
 
 # Virtualbox
