@@ -1,6 +1,8 @@
 waco_master
 ===========
 
+![test](https://github.com/waco-org/waco-master/actions/workflows/test.yml/badge.svg)
+
 An Ansible role that orchestrates the installation of several developer oriented tools by driving
 other roles. Currently only Red Hat open distributions are supported, i.e. CentOS 8, CentOS 7 and
 Fedora 35. Neither RHEL 8 and 7 nor other derivatives were tested, but they should work without
