@@ -4,9 +4,8 @@ waco_master
 ![test](https://github.com/waco-org/waco-master/actions/workflows/test.yml/badge.svg)
 
 An Ansible role that orchestrates the installation of several developer oriented tools by driving
-other roles. Currently only Red Hat open distributions are supported, i.e. CentOS 8, CentOS 7 and
-Fedora 35. Neither RHEL 8 and 7 nor other derivatives were tested, but they should work without
-problems. Centos Stream variants are not supported.
+other roles. Supported distributions are the currently maintained releases of the Red Hat family and
+derivatives. At this time tests are run on CentOS 8, CentOS 7, Fedora 35 and Fedora 34.
 
 The currently supported tools and applications are:
 
@@ -44,7 +43,7 @@ The `nmusatti.docker_ce` role is used to install Docker Community Edition.
 
 The `nmusatti.source_python` role is used to install Python from source.
 
-The `nmusatti.waco_python` is used to customize Python installations. Note that the
+The `waco_org.waco_python` is used to customize Python installations. Note that the
 `waco_python` role is not currently available from Ansible Galaxy and must be downloaded from its
 [GitHub repository](https://github.com/waco-org/waco-python.git).
 
@@ -62,7 +61,7 @@ variable file:
 
     - hosts: servers
       roles:
-         - role: nmusatti.waco_master
+         - role: waco_org.waco_master
            vars_file: my_defaults.yml
 
 > Note: Currently I cannot upload this role to Ansible Galaxy, so you need to download it from
