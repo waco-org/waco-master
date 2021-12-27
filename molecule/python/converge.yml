@@ -1,12 +1,10 @@
 ---
 - name: Converge
   hosts: all
-  tasks:
-    - name: "Include waco-master"
-      include_role:
-        name: "waco-master"
-      vars:
-        waco_has_python: true
-        wapy_source_versions:
-          - 3.7.9
-          - 2.7.18
+  roles:
+    - role: waco_org.waco_master
+  vars:
+    waco_has_python: true
+    wapy_source_versions:
+      - 3.7.9
+      - 2.7.18

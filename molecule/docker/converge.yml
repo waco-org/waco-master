@@ -3,10 +3,8 @@
   hosts: all
   environment:
     DOCKER_HOST: unix:///docker.sock
-  tasks:
-    - name: "Include waco-master"
-      include_role:
-        name: "waco-master"
-      vars:
-        waco_has_docker: true
-        wado_compose_version: 1.26.2
+  roles:
+    - role: waco_org.waco_master
+  vars:
+    waco_has_docker: true
+    wado_compose_version: 1.26.2

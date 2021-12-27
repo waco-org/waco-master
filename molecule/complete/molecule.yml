@@ -9,22 +9,8 @@ lint: |
   ansible-lint
   flake8
 platforms:
-  - name: centos7
-    image: nmusatti/centos7-pys-systemd
-    command: /sbin/init
-    pre_build_image: true
-    privileged: True
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
-  - name: centos8
-    image: nmusatti/centos8-pys-systemd
-    command: /sbin/init
-    pre_build_image: true
-    privileged: True
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
-  - name: fedora
-    image: nmusatti/fedora-pys-systemd
+  - name: $TOX_ENVNAME
+    image: nmusatti/${TOX_ENVNAME}-pys-systemd
     command: /sbin/init
     pre_build_image: true
     privileged: True

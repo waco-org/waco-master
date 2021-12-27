@@ -16,11 +16,11 @@ def test_hosts_file(host):
 
 
 def test_python3(host):
-    host.check_output('/usr/bin/python3 --version').find('3') > -1
+    assert '3' in host.check_output('/usr/bin/python3 --version')
 
 
 def test_python2(host):
-    host.check_output('/usr/bin/python2 --version').find('2') > -1
+    assert '2' in host.check_output('/usr/bin/python2 --version 2>&1')
 
 
 def test_source_python3(host):
@@ -29,8 +29,8 @@ def test_source_python3(host):
     assert f.user == 'python'
     assert f.group == 'python'
 
-    host.check_output('/opt/Python-3.7/bin/python3.7 --version').find(
-            '3.7.9') > -1
+    assert '3.7.9' in host.check_output(
+        '/opt/Python-3.7/bin/python3.7 --version')
 
 
 def test_source_python2(host):
@@ -39,5 +39,5 @@ def test_source_python2(host):
     assert f.user == 'python'
     assert f.group == 'python'
 
-    host.check_output('/opt/Python-2.7/bin/python2.7 --version').find(
-            '2.7.18') > -1
+    assert '2.7.18' in host.check_output(
+        '/opt/Python-2.7/bin/python2.7 --version 2>&1')
