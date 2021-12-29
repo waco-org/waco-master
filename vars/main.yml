@@ -2,10 +2,11 @@
 # Workstation as Code
 # Copyright Nicola Musatti 2020.
 
-waco_platform: "{{ ansible_distribution }}{{ 
-( ansible_distribution == 'CentOS' ) | ternary(ansible_distribution_major_version, '') }}"
-waco_powertools_file: "{{ ( ansible_distribution_version in ( '8.2', '8.1', '8.0', '8' ) ) | ternary('CentOS-PowerTools.repo', 'CentOS-Linux-PowerTools.repo') }}"
+waco_platform: "{{ ( ansible_os_family == 'RedHat' and ansible_distribution != 'Fedora' ) |
+ternary('EL' + ansible_distribution_major_version, ansible_distribution) }}"
+waco_powertools_file: "{{ ( ansible_distribution == 'CentOS' and ansible_distribution_version not in ( '8.2', '8.1', '8.0', '8' ) ) | ternary('CentOS-Linux-PowerTools.repo', ansible_distribution + '-PowerTools.repo') }}"
 waco_powertools_name: "{{ ( ansible_distribution_version in ( '8.2', '8.1', '8.0', '8' ) ) | ternary('PowerTools', 'powertools') }}"
-wavb_distro: "{{ ( waco_platform in ( 'CentOS8', 'CentOS7' ) ) | ternary('el', 'fedora') }}"
+wavb_redhat_distro: "{{ ( waco_platform in ( 'EL8', 'EL7' ) ) | ternary('el', 'fedora') }}"
+wavb_distro: "{{ ( waco_platform in ( 'Ubuntu' ) ) | ternary('ubuntu', wavb_redhat_distro ) }}"
 wavb_version: "{{ ( wavb_release | string ) + ( ( wavb_package != '' ) | ternary('-' + wavb_package, '') ) }}"
-waco_hashi_distro: "{{ ( waco_platform in ( 'CentOS8', 'CentOS7' ) ) | ternary('RHEL', 'fedora') }}"
+waco_hashi_distro: "{{ ( waco_platform in ( 'EL8', 'EL7' ) ) | ternary('RHEL', 'fedora') }}"

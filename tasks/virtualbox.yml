@@ -2,23 +2,23 @@
 # Workstation as Code
 # Copyright Nicola Musatti 2020.
 
-- name: "Install the required packages (CentOS 8, Fedora)"
+- name: "Install the required packages (EL 8, Fedora)"
   dnf:
     name: "{{ packages }}"
   vars:
     packages:
       - yum-utils
   become: true
-  when: waco_platform in ( 'CentOS8', 'Fedora' )
+  when: waco_platform in ( 'EL8', 'Fedora' )
 
-- name: "Install the required packages (CentOS 7)"
+- name: "Install the required packages (EL 7)"
   yum:
     name: "{{ packages }}"
   vars:
     packages:
       - yum-utils
   become: true
-  when: waco_platform == 'CentOS7'
+  when: waco_platform == 'EL7'
 
 - name: Check if the official VirtualBox repository is available
   stat:
@@ -30,24 +30,24 @@
   become: true
   when: wavb_repo.stat.exists is defined and not wavb_repo.stat.exists
 
-- name: "Install VirtualBox (CentOS 8, Fedora)"
+- name: "Install VirtualBox (EL 8, Fedora)"
   dnf:
     name: "{{ packages }}"
   vars:
     packages:
       - "VirtualBox-{{ wavb_version }}"
   become: true
-  when: waco_platform in ( 'CentOS8', 'Fedora' )
+  when: waco_platform in ( 'EL8', 'Fedora' )
   register: wavb_installed
 
-- name: "Install VirtualBox (CentOS 7)"
+- name: "Install VirtualBox (EL 7)"
   yum:
     name: "{{ packages }}"
   vars:
     packages:
       - "VirtualBox-{{ wavb_version }}"
   become: true
-  when: waco_platform == 'CentOS7'
+  when: waco_platform == 'EL7'
   register: wavb_installed
 
 - name: Disable the official VirtualBox repository

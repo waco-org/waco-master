@@ -2,33 +2,33 @@
 # Workstation as Code
 # Copyright Nicola Musatti 2020 - 2021.
 
-- name: Install deltarpm support (CentOS8, Fedora)
+- name: Install deltarpm support (EL 8, Fedora)
   dnf:
     name: "{{ packages }}"
   vars:
     packages:
       - drpm
   become: true
-  when: waco_platform in ( 'CentOS8', 'Fedora' )
+  when: waco_platform in ( 'EL8', 'Fedora' )
 
-- name: Install deltarpm support (CentOS7)
+- name: Install deltarpm support (EL 7)
   yum:
     name: "{{ packages }}"
   vars:
     packages:
       - deltarpm
   become: true
-  when: waco_platform in ( 'CentOS7' )
+  when: waco_platform in ( 'EL7' )
 
-- name: Enable the EPEL repository (CentOS 8, CentOS7)
+- name: Enable the EPEL repository (EL 8, EL 7)
   include_role:
     name: geerlingguy.repo-epel
-  when: waco_platform in ( 'CentOS8', 'CentOS7' )
+  when: waco_platform in ( 'EL8', 'EL7' )
 
-- name: Enable the PowerTools repository (CentOS 8)
+- name: Enable the PowerTools repository (EL 8)
   include_tasks:
     file: powertools.yml
-  when: waco_platform == 'CentOS8'
+  when: waco_platform == 'EL8'
 
 - name: Install Docker
   include_tasks:
@@ -40,21 +40,21 @@
     name: waco-python
   when: waco_has_python
 
-- name: Install system packages (CentOS 8, Fedora)
+- name: Install system packages (EL 8, Fedora)
   dnf:
     name: "{{ packages }}"
   vars:
     packages: "{{ waco_packages }}"
   become: true
-  when: waco_platform in ( 'CentOS8', 'Fedora' )
+  when: waco_platform in ( 'EL8', 'Fedora' )
 
-- name: Install system packages (CentOS 7)
+- name: Install system packages (EL 7)
   yum:
     name: "{{ packages }}"
   vars:
     packages: "{{ waco_packages }}"
   become: true
-  when: waco_platform == 'CentOS7'
+  when: waco_platform == 'EL7'
 
 - name: Install system-wide flatpak apps
   include_tasks:

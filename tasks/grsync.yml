@@ -2,15 +2,15 @@
 # Workstation as Code
 # Copyright Nicola Musatti 2020.
 
-- name: Enable the EPEL repository (CentOS 7)
+- name: Enable the EPEL repository (EL 7)
   include_role:
     name: geerlingguy.repo-epel
-  when: waco_platform == 'CentOS7'
+  when: waco_platform == 'EL7'
 
-- name: Enable the PowerTools repository (CentOS 8)
+- name: Enable the PowerTools repository (EL 8)
   include_tasks:
     file: powertools.yml
-  when: waco_platform == 'CentOS8'
+  when: waco_platform == 'EL8'
 
 - name: Check whether the nmusatti/grsync repository is enabled
   command: dnf copr list --enabled
@@ -18,25 +18,25 @@
   check_mode: false
   ignore_errors: true
   changed_when: false
-  when: waco_platform == 'CentOS8'
+  when: waco_platform == 'EL8'
 
 - name: Enable the nmusatti/grsync repository
   command: dnf copr -y enable nmusatti/grsync
   become: true
-  when: waco_platform == 'CentOS8' and grsync_enabled.stdout.find('nmusatti/grsync') == -1
+  when: waco_platform == 'EL8' and grsync_enabled.stdout.find('nmusatti/grsync') == -1
 
-- name: Install grsync (CentOS8, Fedora)
+- name: Install grsync (EL 8, Fedora)
   dnf:
     name:
       - grsync
     state: present
   become: true
-  when: waco_platform in ( 'CentOS8', 'Fedora' )
+  when: waco_platform in ( 'EL8', 'Fedora' )
 
-- name: Install grsync (CentOS7)
+- name: Install grsync (EL 7)
   yum:
     name:
       - grsync
     state: present
   become: true
-  when: waco_platform == 'CentOS7'
+  when: waco_platform == 'EL7'

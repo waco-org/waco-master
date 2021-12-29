@@ -23,20 +23,20 @@
   become: true
   when: vscode_file is changed
 
-- name: "Install VS Code (CentOS 8, Fedora)"
+- name: "Install VS Code (EL 8, Fedora)"
   dnf:
     name: "{{ packages }}"
   vars:
     packages:
       - code
   become: true
-  when: waco_platform in ( 'CentOS8', 'Fedora' )
+  when: waco_platform in ( 'EL8', 'Fedora' )
 
-- name: "Install VS Code (CentOS 7)"
+- name: "Install VS Code (EL 7)"
   yum:
     name: "{{ packages }}"
   vars:
     packages:
       - code
   become: true
-  when: waco_platform == 'CentOS7'
+  when: waco_platform == 'EL7'

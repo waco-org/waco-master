@@ -21,15 +21,15 @@
   retries: 3
   delay: 3
 
-- name: "Install Vagrant (CentOS 8, Fedora)"
+- name: "Install Vagrant (EL 8, Fedora)"
   dnf:
     name: "{{ waco_software_dir }}/vagrant/vagrant_{{ wava_version }}_x86_64.rpm"
     disable_gpg_check: true
   become: true
-  when: waco_platform in ( 'CentOS8', 'Fedora' )
+  when: waco_platform in ( 'EL8', 'Fedora' )
 
-- name: "Install Vagrant (CentOS 7)"
+- name: "Install Vagrant (EL 7)"
   yum:
     name: "{{ waco_software_dir }}/vagrant/vagrant_{{ wava_version }}_x86_64.rpm"
   become: true
-  when: waco_platform == 'CentOS7'
+  when: waco_platform == 'EL7'

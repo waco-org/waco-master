@@ -2,23 +2,23 @@
 # Workstation as Code
 # Copyright Nicola Musatti 2020.
 
-- name: "Install the required packages (CentOS 8, Fedora)"
+- name: "Install the required packages (EL 8, Fedora)"
   dnf:
     name: "{{ packages }}"
   vars:
     packages:
       - yum-utils
   become: true
-  when: waco_platform in ( 'CentOS8', 'Fedora' )
+  when: waco_platform in ( 'EL8', 'Fedora' )
 
-- name: "Install the required packages (CentOS 7)"
+- name: "Install the required packages (EL 7)"
   yum:
     name: "{{ packages }}"
   vars:
     packages:
       - yum-utils
   become: true
-  when: waco_platform == 'CentOS7'
+  when: waco_platform == 'EL7'
 
 - name: Check if the official HashiCorp repository is available
   stat:
@@ -30,24 +30,24 @@
   become: true
   when: packer_repo.stat.exists is defined and not packer_repo.stat.exists
 
-- name: "Install Packer (CentOS 8, Fedora)"
+- name: "Install Packer (EL 8, Fedora)"
   dnf:
     name: "{{ packages }}"
   vars:
     packages:
       - packer
   become: true
-  when: waco_platform in ( 'CentOS8', 'Fedora' )
+  when: waco_platform in ( 'EL8', 'Fedora' )
   register: packer_installed
 
-- name: "Install Packer (CentOS 7)"
+- name: "Install Packer (EL 7)"
   yum:
     name: "{{ packages }}"
   vars:
     packages:
       - packer
   become: true
-  when: waco_platform == 'CentOS7'
+  when: waco_platform == 'EL7'
   register: packer_installed
 
 - name: Disable the official Packer repository

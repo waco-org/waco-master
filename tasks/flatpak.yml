@@ -2,17 +2,17 @@
 # Workstation as Code
 # Copyright Nicola Musatti 2020.
 
-- name: Install flatpak (CentOS 8, Fedora)
+- name: Install flatpak (EL 8, Fedora)
   dnf:
     name: flatpak
   become: true
-  when: waco_platform in ( 'CentOS8', 'Fedora' )
+  when: waco_platform in ( 'EL8', 'Fedora' )
 
-- name: Install system packages (CentOS 7)
+- name: Install system packages (EL 7)
   yum:
     name: flatpak
   become: true
-  when: waco_platform == 'CentOS7'
+  when: waco_platform == 'EL7'
 
 - name: Add a flatpak repository remote
   community.general.flatpak_remote:
