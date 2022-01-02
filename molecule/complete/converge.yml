@@ -11,14 +11,15 @@
     waco_flatpak_apps:
       - org.musicbrainz.Picard
     waco_has_docker: true
-    wado_compose_version: 1.26.2
+    wado_compose_version: v2.2.2
+    waco_has_dropbox: true
     waco_has_grsync: true
     waco_has_maven: true
-    wamvn_version: 3.5.4
+    wamvn_version: 3.8.4
     waco_has_packer: true
     waco_has_python: true
     wapy_source_versions:
-      - 3.7.9
+      - 3.10.1
       - 2.7.18
     waco_has_vagrant: true
     waco_has_virtualbox: true
