@@ -1,6 +1,6 @@
 ---
 # Workstation as Code
-# Copyright Nicola Musatti 2020.
+# Copyright Nicola Musatti 2020 - 2021.
 
 - name: Install system packages for Maven (EL 8, Fedora)
   dnf:
@@ -19,6 +19,15 @@
       - unzip
   become: true
   when: waco_platform == 'EL7'
+
+- name: Install system packages for Maven (Ubuntu)
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+      - unzip
+  become: true
+  when: waco_platform == 'Ubuntu'
 
 - name: "Create base directories for Maven"
   file:

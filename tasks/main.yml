@@ -56,6 +56,14 @@
   become: true
   when: waco_platform == 'EL7'
 
+- name: Install system packages (Ubuntu)
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages: "{{ waco_packages }}"
+  become: true
+  when: waco_platform == 'Ubuntu'
+
 - name: Install system-wide flatpak apps
   include_tasks:
     file: flatpak.yml
@@ -64,7 +72,7 @@
     flatpak_url: "https://dl.flathub.org/repo/flathub.flatpakrepo"
     flatpak_method: system
     flatpak_apps: "{{ waco_flatpak_apps }}"
-  when: waco_flatpak_apps | length > 0
+  when: ansible_os_family == 'RedHat' and waco_flatpak_apps | length > 0
 
 - name: Install grsync
   include_tasks:
@@ -77,6 +85,12 @@
     file: maven.yml
   vars:
   when: waco_has_maven
+
+- name: Install the official Hashicorp repository
+  include_tasks:
+    file: hashicorp.yml
+  vars:
+  when: waco_has_packer or waco_has_vagrant
 
 - name: Install Packer
   include_tasks:

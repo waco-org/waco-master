@@ -13,7 +13,7 @@
 
 - name: Execute the Rust installation script
   command:
-    cmd: "/usr/bin/sh /tmp/rustup.sh -y"
+    cmd: "/bin/sh /tmp/rustup.sh -y"
     creates: "/home/{{ user }}/.cargo/bin/rustup"
   become: true
   become_user: "{{ user }}"

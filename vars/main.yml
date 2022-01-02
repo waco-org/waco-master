@@ -1,6 +1,6 @@
 ---
 # Workstation as Code
-# Copyright Nicola Musatti 2020.
+# Copyright Nicola Musatti 2020 - 2021.
 
 waco_platform: "{{ ( ansible_os_family == 'RedHat' and ansible_distribution != 'Fedora' ) |
 ternary('EL' + ansible_distribution_major_version, ansible_distribution) }}"

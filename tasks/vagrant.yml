@@ -1,35 +1,31 @@
 ---
 # Workstation as Code
-# Copyright Nicola Musatti 2020.
-
-- name: Create base directories for Vagrant
-  file:
-    dest: "{{ item }}"
-    state: directory
-    mode: 0755
-  become: true
-  loop:
-    - "{{ waco_software_dir }}"
-    - "{{ waco_software_dir }}/vagrant"
-
-- name: Download the Vagrant package
-  get_url:
-    dest: "{{ waco_software_dir }}/vagrant"
-    url: "https://releases.hashicorp.com/vagrant/{{ wava_version }}/vagrant_{{ wava_version }}_x86_64.rpm"
-    mode: 0644
-  become: true
-  retries: 3
-  delay: 3
+# Copyright Nicola Musatti 2020 - 2021.
 
 - name: "Install Vagrant (EL 8, Fedora)"
   dnf:
-    name: "{{ waco_software_dir }}/vagrant/vagrant_{{ wava_version }}_x86_64.rpm"
-    disable_gpg_check: true
+    name: "{{ packages }}"
+  vars:
+    packages:
+      - vagrant
   become: true
   when: waco_platform in ( 'EL8', 'Fedora' )
+  register: vagrant_installed
 
 - name: "Install Vagrant (EL 7)"
   yum:
-    name: "{{ waco_software_dir }}/vagrant/vagrant_{{ wava_version }}_x86_64.rpm"
+    name: "{{ packages }}"
+  vars:
+    packages:
+      - vagrant
   become: true
   when: waco_platform == 'EL7'
+  register: vagrant_installed
+
+- name: "Install Vagrant (Ubuntu)"
+  apt:
+    name:
+      - vagrant
+  become: true
+  when: ansible_distribution == 'Ubuntu'
+  register: vagrant_installed
