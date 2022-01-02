@@ -84,9 +84,7 @@
 
 - name: "Install VS Code (Ubuntu)"
   apt:
-    name: "{{ packages }}"
-  vars:
-    packages:
+    name:
       - code
   become: true
   when: waco_platform == 'Ubuntu'

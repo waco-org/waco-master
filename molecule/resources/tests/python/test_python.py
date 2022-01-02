@@ -29,8 +29,8 @@ def test_source_python3(host):
     assert f.user == 'python'
     assert f.group == 'python'
 
-    assert '3.7.9' in host.check_output(
-        '/opt/Python-3.7/bin/python3.7 --version')
+    assert '3.10.1' in host.check_output(
+        '/opt/Python-3.10/bin/python3.10 --version')
 
 
 def test_source_python2(host):
