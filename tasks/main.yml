@@ -1,6 +1,6 @@
 ---
 # Workstation as Code
-# Copyright Nicola Musatti 2020 - 2021.
+# Copyright Nicola Musatti 2020 - 2022.
 
 - name: Install deltarpm support (EL 8, Fedora)
   dnf:
@@ -30,10 +30,37 @@
     file: powertools.yml
   when: waco_platform == 'EL8'
 
+- name: Install essential packages (Ubuntu)
+  apt:
+    name:
+      - ca-certificates
+      - curl
+      - gnupg
+      - lsb-release
+  become: true
+  when: waco_platform == 'Ubuntu'
+
+- name: Retrieve package architecture
+  command: "dpkg --print-architecture"
+  register: dpkg_architecture
+  changed_when: False
+  when: waco_platform == 'Ubuntu'
+
+- name: Retrieve LSB release
+  command: "lsb_release -cs"
+  register: lsb_release
+  changed_when: False
+  when: waco_platform == 'Ubuntu'
+
 - name: Install Docker
   include_tasks:
     file: docker.yml
   when: waco_has_docker
+
+- name: Install Dropbox
+  include_tasks:
+    file: dropbox.yml
+  when: waco_has_dropbox
 
 - name: Install Python
   include_role:
