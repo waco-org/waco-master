@@ -1,6 +1,6 @@
 ---
 # Workstation as Code
-# Copyright Nicola Musatti 2021.
+# Copyright Nicola Musatti 2021 - 2022.
 
 - name: "Install the required packages (EL 8, Fedora)"
   dnf:
