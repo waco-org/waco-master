@@ -23,7 +23,6 @@
 - name: Enable the EPEL repository (EL 8, EL 7)
   include_role:
     name: geerlingguy.repo-epel
-  become: true
   when: waco_platform in ( 'EL8', 'EL7' )
 
 - name: Enable the PowerTools repository (EL 8)
