@@ -1,6 +1,7 @@
 ---
-- src: https://github.com/waco-org/waco-python.git
-  scm: git
+# - src: https://github.com/waco-org/waco-python.git
+#   scm: git
+- src: waco_org.waco_python
 
 - src: nmusatti.docker_ce
 

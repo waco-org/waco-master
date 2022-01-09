@@ -17,7 +17,7 @@ The currently supported tools and applications are:
     + Mercurial
     + Sphinx
 
-- Flatpak and flatpak applications, both system and user level
+- Flatpak and flatpak applications, both system and user level (Red Hat family only)
 - Grsync
 - Apache Maven
 - Hashicorp Packer
@@ -44,9 +44,7 @@ The `nmusatti.docker_ce` role is used to install Docker Community Edition.
 
 The `nmusatti.source_python` role is used to install Python from source.
 
-The `waco_org.waco_python` is used to customize Python installations. Note that the
-`waco_python` role is not currently available from Ansible Galaxy and must be downloaded from its
-[GitHub repository](https://github.com/waco-org/waco-python.git).
+The `waco_org.waco_python` is used to customize Python installations.
 
 The `geerlingguy.repo-epel` role is used to enable the EPEL repository on CentOS.
 
@@ -64,9 +62,6 @@ variable file:
       roles:
          - role: waco_org.waco_master
            vars_file: my_defaults.yml
-
-> Note: Currently I cannot upload this role to Ansible Galaxy, so you need to download it from
-> GitHub.
 
 License
 -------
