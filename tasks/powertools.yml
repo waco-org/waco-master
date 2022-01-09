@@ -2,7 +2,7 @@
 # Workstation as Code
 # Copyright Nicola Musatti 2020.
 
-# CentOS 8 only
+# EL 8 only
 
 - name: Check whether the PowerTools repository is enabled
   command: "grep -q 'enabled=1' /etc/yum.repos.d/{{ waco_powertools_file }}"

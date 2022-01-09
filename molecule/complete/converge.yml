@@ -7,23 +7,24 @@
     - role: waco_org.waco_master
   vars:
     waco_packages:
-      - vim-X11
+      - "{{ ( ansible_os_family == 'RedHat' ) | ternary('vim-X11', 'vim-gui-common') }}"
     waco_flatpak_apps:
       - org.musicbrainz.Picard
     waco_has_docker: true
-    wado_compose_version: 1.26.2
+    wado_compose_version: v2.2.2
+    waco_has_dropbox: true
     waco_has_grsync: true
     waco_has_maven: true
-    wamvn_version: 3.5.4
+    wamvn_version: 3.8.4
     waco_has_packer: true
     waco_has_python: true
     wapy_source_versions:
-      - 3.7.9
+      - 3.9.0
       - 2.7.18
     waco_has_vagrant: true
     waco_has_virtualbox: true
-    wavb_el_package: "6.1.14_140239_el{{ ansible_distribution_major_version }}-1"
-    wavb_package: "{{ ( waco_platform == 'Fedora' ) | ternary('', wavb_el_package) }}"
+    # wavb_el_package: "6.1.14_140239_el{{ ansible_distribution_major_version }}-1"
+    # wavb_package: "{{ ( waco_platform == 'Fedora' ) | ternary('', wavb_el_package) }}"
     waco_has_vscode: true
     waco_users: [ "user" ]
     waco_user_settings:

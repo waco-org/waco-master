@@ -1,60 +1,95 @@
 ---
 # Workstation as Code
-# Copyright Nicola Musatti 2020 - 2021.
+# Copyright Nicola Musatti 2020 - 2022.
 
-- name: Install deltarpm support (CentOS8, Fedora)
+- name: Install deltarpm support (EL 8, Fedora)
   dnf:
     name: "{{ packages }}"
   vars:
     packages:
       - drpm
   become: true
-  when: waco_platform in ( 'CentOS8', 'Fedora' )
+  when: waco_platform in ( 'EL8', 'Fedora' )
 
-- name: Install deltarpm support (CentOS7)
+- name: Install deltarpm support (EL 7)
   yum:
     name: "{{ packages }}"
   vars:
     packages:
       - deltarpm
   become: true
-  when: waco_platform in ( 'CentOS7' )
+  when: waco_platform in ( 'EL7' )
 
-- name: Enable the EPEL repository (CentOS 8, CentOS7)
+- name: Enable the EPEL repository (EL 8, EL 7)
   include_role:
     name: geerlingguy.repo-epel
-  when: waco_platform in ( 'CentOS8', 'CentOS7' )
+  when: waco_platform in ( 'EL8', 'EL7' )
 
-- name: Enable the PowerTools repository (CentOS 8)
+- name: Enable the PowerTools repository (EL 8)
   include_tasks:
     file: powertools.yml
-  when: waco_platform == 'CentOS8'
+  when: waco_platform == 'EL8'
+
+- name: Install essential packages (Ubuntu)
+  apt:
+    name:
+      - ca-certificates
+      - curl
+      - gnupg
+      - lsb-release
+  become: true
+  when: waco_platform == 'Ubuntu'
+
+- name: Retrieve package architecture
+  command: "dpkg --print-architecture"
+  register: dpkg_architecture
+  changed_when: False
+  when: waco_platform == 'Ubuntu'
+
+- name: Retrieve LSB release
+  command: "lsb_release -cs"
+  register: lsb_release
+  changed_when: False
+  when: waco_platform == 'Ubuntu'
 
 - name: Install Docker
   include_tasks:
     file: docker.yml
   when: waco_has_docker
 
+- name: Install Dropbox
+  include_tasks:
+    file: dropbox.yml
+  when: waco_has_dropbox
+
 - name: Install Python
   include_role:
     name: waco-python
   when: waco_has_python
 
-- name: Install system packages (CentOS 8, Fedora)
+- name: Install system packages (EL 8, Fedora)
   dnf:
     name: "{{ packages }}"
   vars:
     packages: "{{ waco_packages }}"
   become: true
-  when: waco_platform in ( 'CentOS8', 'Fedora' )
+  when: waco_platform in ( 'EL8', 'Fedora' )
 
-- name: Install system packages (CentOS 7)
+- name: Install system packages (EL 7)
   yum:
     name: "{{ packages }}"
   vars:
     packages: "{{ waco_packages }}"
   become: true
-  when: waco_platform == 'CentOS7'
+  when: waco_platform == 'EL7'
+
+- name: Install system packages (Ubuntu)
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages: "{{ waco_packages }}"
+  become: true
+  when: waco_platform == 'Ubuntu'
 
 - name: Install system-wide flatpak apps
   include_tasks:
@@ -64,7 +99,7 @@
     flatpak_url: "https://dl.flathub.org/repo/flathub.flatpakrepo"
     flatpak_method: system
     flatpak_apps: "{{ waco_flatpak_apps }}"
-  when: waco_flatpak_apps | length > 0
+  when: ansible_os_family == 'RedHat' and waco_flatpak_apps | length > 0
 
 - name: Install grsync
   include_tasks:
@@ -77,6 +112,12 @@
     file: maven.yml
   vars:
   when: waco_has_maven
+
+- name: Install the official Hashicorp repository
+  include_tasks:
+    file: hashicorp.yml
+  vars:
+  when: waco_has_packer or waco_has_vagrant
 
 - name: Install Packer
   include_tasks:

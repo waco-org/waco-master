@@ -31,6 +31,10 @@ waco_docker_user: docker
 waco_docker_uid: 1000
 
 
+# Dropbox
+waco_has_dropbox: false
+
+
 # grsync
 waco_has_grsync: false
 

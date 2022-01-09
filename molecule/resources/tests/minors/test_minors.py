@@ -16,7 +16,7 @@ def test_grsync(host):
 
 
 def test_maven(host):
-    f = host.file('/opt/apache-maven-3.5.4/bin/mvn')
+    f = host.file('/opt/apache-maven-3.8.4/bin/mvn')
 
     assert f.exists
     assert f.user == 'root'

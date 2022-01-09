@@ -5,7 +5,8 @@ waco_master
 
 An Ansible role that orchestrates the installation of several developer oriented tools by driving
 other roles. Supported distributions are the currently maintained releases of the Red Hat family and
-derivatives. At this time tests are run on CentOS 8, CentOS 7, Fedora 35 and Fedora 34.
+derivatives, and of the Ubuntu LTS variants. At this time tests are run on Rocky Linux 8, CentOS 7,
+Fedora 35, Fedora 34, Ubuntu 20.04 and Ubuntu 18.04.
 
 The currently supported tools and applications are:
 
@@ -16,7 +17,7 @@ The currently supported tools and applications are:
     + Mercurial
     + Sphinx
 
-- Flatpak and flatpak applications, both system and user level
+- Flatpak and flatpak applications, both system and user level (Red Hat family only)
 - Grsync
 - Apache Maven
 - Hashicorp Packer
@@ -43,9 +44,7 @@ The `nmusatti.docker_ce` role is used to install Docker Community Edition.
 
 The `nmusatti.source_python` role is used to install Python from source.
 
-The `waco_org.waco_python` is used to customize Python installations. Note that the
-`waco_python` role is not currently available from Ansible Galaxy and must be downloaded from its
-[GitHub repository](https://github.com/waco-org/waco-python.git).
+The `waco_org.waco_python` is used to customize Python installations.
 
 The `geerlingguy.repo-epel` role is used to enable the EPEL repository on CentOS.
 
@@ -63,9 +62,6 @@ variable file:
       roles:
          - role: waco_org.waco_master
            vars_file: my_defaults.yml
-
-> Note: Currently I cannot upload this role to Ansible Galaxy, so you need to download it from
-> GitHub.
 
 License
 -------

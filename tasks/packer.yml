@@ -1,56 +1,44 @@
 ---
 # Workstation as Code
-# Copyright Nicola Musatti 2020.
+# Copyright Nicola Musatti 2020 - 2021.
 
-- name: "Install the required packages (CentOS 8, Fedora)"
-  dnf:
-    name: "{{ packages }}"
-  vars:
-    packages:
-      - yum-utils
-  become: true
-  when: waco_platform in ( 'CentOS8', 'Fedora' )
-
-- name: "Install the required packages (CentOS 7)"
-  yum:
-    name: "{{ packages }}"
-  vars:
-    packages:
-      - yum-utils
-  become: true
-  when: waco_platform == 'CentOS7'
-
-- name: Check if the official HashiCorp repository is available
-  stat:
-    path: /etc/yum.repos.d/hashicorp.repo
-  register: packer_repo
-
-- name: Install the official Packer repository
-  command: "yum-config-manager --add-repo https://rpm.releases.hashicorp.com/{{ waco_hashi_distro }}/hashicorp.repo"
-  become: true
-  when: packer_repo.stat.exists is defined and not packer_repo.stat.exists
-
-- name: "Install Packer (CentOS 8, Fedora)"
+- name: "Install Packer (EL 8, Fedora)"
   dnf:
     name: "{{ packages }}"
   vars:
     packages:
       - packer
   become: true
-  when: waco_platform in ( 'CentOS8', 'Fedora' )
+  when: waco_platform in ( 'EL8', 'Fedora' )
   register: packer_installed
 
-- name: "Install Packer (CentOS 7)"
+- name: "Install Packer (EL 7)"
   yum:
     name: "{{ packages }}"
   vars:
     packages:
       - packer
   become: true
-  when: waco_platform == 'CentOS7'
+  when: waco_platform == 'EL7'
   register: packer_installed
 
-- name: Disable the official Packer repository
-  command: "yum-config-manager --disable packer.repo"
+# - name: Disable the official Hashicorp repository (RedHat)
+#   command: "yum-config-manager --disable hashicorp.repo"
+#   become: true
+#   when: ansible_os_family == 'RedHat' and packer_installed is changed and wapa_disable_repo
+
+- name: "Install Packer (Ubuntu)"
+  apt:
+    name:
+      - packer
   become: true
-  when: packer_installed is changed and wapa_disable_repo
+  when: ansible_distribution == 'Ubuntu'
+  register: packer_installed
+
+# - name: Remove the official Hashicorp repository (Ubuntu)
+#   apt_repository:
+#     repo: "deb [arch=amd64] https://apt.releases.hashicorp.com {{ lsb_release.stdout }} main"
+#     file: hashicorp
+#     present: false
+#   become: true
+#   when: ansible_distribution == 'Ubuntu' and packer_installed is changed and wapa_disable_repo
