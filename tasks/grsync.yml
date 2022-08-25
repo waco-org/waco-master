@@ -3,17 +3,17 @@
 # Copyright Nicola Musatti 2020 - 2022.
 
 - name: Enable the EPEL repository (EL 7)
-  include_role:
+  ansible.builtin.include_role:
     name: geerlingguy.repo-epel
   when: waco_platform == 'EL7'
 
 - name: Enable the PowerTools repository (EL 8)
-  include_tasks:
+  ansible.builtin.include_tasks:
     file: powertools.yml
   when: waco_platform == 'EL8'
 
 - name: Check whether the nmusatti/grsync repository is enabled
-  command: dnf copr list --enabled
+  ansible.builtin.command: dnf copr list --enabled
   register: grsync_enabled
   check_mode: false
   ignore_errors: true
@@ -21,20 +21,20 @@
   when: waco_platform == 'EL8'
 
 - name: Enable the nmusatti/grsync repository
-  command: dnf copr -y enable nmusatti/grsync
+  ansible.builtin.command: dnf copr -y enable nmusatti/grsync
   become: true
-  when: waco_platform == 'EL8' and grsync_enabled.stdout.find('nmusatti/grsync') == -1
+  when: waco_platform == 'EL8' and grsync_enabled.stdout.find('nmusatti/grsync') == - 1
 
 - name: Install grsync (EL 8, Fedora)
-  dnf:
+  ansible.builtin.dnf:
     name:
       - grsync
     state: present
   become: true
-  when: waco_platform in ( 'EL8', 'Fedora' )
+  when: waco_platform in ('EL8', 'Fedora')
 
 - name: Install grsync (EL 7)
-  yum:
+  ansible.builtin.yum:
     name:
       - grsync
     state: present
@@ -42,7 +42,7 @@
   when: waco_platform == 'EL7'
 
 - name: Install grsync (Ubuntu)
-  apt:
+  ansible.builtin.apt:
     name:
       - grsync
     state: present

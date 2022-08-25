@@ -5,7 +5,7 @@
 # Ubuntu only
 
 - name: Install the required packages
-  apt:
+  ansible.builtin.apt:
     name:
       - ca-certificates
       - curl
@@ -14,12 +14,12 @@
   become: true
 
 - name: Check if the apt repository is available
-  stat:
+  ansible.builtin.stat:
     path: /etc/apt/sources.list.d/{{ apt_repo_filename }}.list
   register: repo_file
 
 - name: Install the apt repository's GPG key
-  apt_key:
+  ansible.builtin.apt_key:
     url: "{{ apt_key_url }}"
     keyring: "{{ apt_key_ring }}"
     keyserver: "{{ apt_key_server }}"
@@ -29,7 +29,7 @@
   when: repo_file.stat.exists is defined and not repo_file.stat.exists
 
 - name: Install the apt repository
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: "{{ apt_repo_definition }}"
     filename: "{{ apt_repo_filename }}"
   become: true

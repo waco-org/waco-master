@@ -3,13 +3,13 @@
 # Copyright Nicola Musatti 2020 - 2022.
 
 - name: Check if the official VS Code repository is available
-  stat:
+  ansible.builtin.stat:
     path: /etc/yum.repos.d/vscode.repo
   register: vscode_repo
   when: ansible_os_family == 'RedHat'
 
 - name: Copy the VS Code repo file
-  copy:
+  ansible.builtin.copy:
     src: vscode.repo
     dest: /tmp
     mode: 0644
@@ -20,21 +20,21 @@
   when: ansible_os_family == 'RedHat' and vscode_repo.stat.exists is defined and not vscode_repo.stat.exists
 
 - name: Install the official VS Code repository
-  command: "yum-config-manager --add-repo /tmp/vscode.repo"
+  ansible.builtin.command: "yum-config-manager --add-repo /tmp/vscode.repo"
   become: true
   when: ansible_os_family == 'RedHat' and vscode_file is changed
 
-- name: "Install VS Code (EL 8, Fedora)"
-  dnf:
+- name: "Install VS Code (EL 9, EL 8, Fedora)"
+  ansible.builtin.dnf:
     name: "{{ packages }}"
   vars:
     packages:
       - code
   become: true
-  when: waco_platform in ( 'EL8', 'Fedora' )
+  when: waco_platform in ('EL9', 'EL8', 'Fedora')
 
 - name: "Install VS Code (EL 7)"
-  yum:
+  ansible.builtin.yum:
     name: "{{ packages }}"
   vars:
     packages:
@@ -43,7 +43,7 @@
   when: waco_platform == 'EL7'
 
 - name: Install the required packages (Ubuntu)
-  apt:
+  ansible.builtin.apt:
     name:
       - ca-certificates
       - curl
@@ -53,37 +53,37 @@
   when: ansible_distribution == 'Ubuntu'
 
 - name: Check if the official VS Code apt repository is available (Ubuntu)
-  stat:
+  ansible.builtin.stat:
     path: /etc/apt/sources.list.d/vscode.list
   register: vscode_repo
   when: ansible_distribution == 'Ubuntu'
 
 - name: Install the official VS Code GPG key (Ubuntu)
-  apt_key:
+  ansible.builtin.apt_key:
     url: https://packages.microsoft.com/keys/microsoft.asc
     keyring: /etc/apt/trusted.gpg.d/packages.microsoft.gpg
     state: present
   when: ansible_distribution == 'Ubuntu' and vscode_repo.stat.exists is defined and not vscode_repo.stat.exists
 
 - name: Retrieve package architecture
-  command: "dpkg --print-architecture"
+  ansible.builtin.command: "dpkg --print-architecture"
   register: dpkg_architecture
   when: ansible_distribution == 'Ubuntu' and vscode_repo.stat.exists is defined and not vscode_repo.stat.exists
 
 - name: Retrieve LSB release (Ubuntu)
-  command: "lsb_release -cs"
+  ansible.builtin.command: "lsb_release -cs"
   register: lsb_release
   when: ansible_distribution == 'Ubuntu' and vscode_repo.stat.exists is defined and not vscode_repo.stat.exists
 
 - name: Install the official VS Code repository (Ubuntu)
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main"
     filename: vscode
   become: true
   when: ansible_distribution == 'Ubuntu' and vscode_repo.stat.exists is defined and not vscode_repo.stat.exists
 
 - name: "Install VS Code (Ubuntu)"
-  apt:
+  ansible.builtin.apt:
     name:
       - code
   become: true

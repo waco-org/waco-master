@@ -1,19 +1,19 @@
 ---
 # Workstation as Code
-# Copyright Nicola Musatti 2020 - 2021.
+# Copyright Nicola Musatti 2020 - 2022.
 
-- name: "Install Packer (EL 8, Fedora)"
-  dnf:
+- name: "Install Packer (EL 9, EL 8, Fedora)"
+  ansible.builtin.dnf:
     name: "{{ packages }}"
   vars:
     packages:
       - packer
   become: true
-  when: waco_platform in ( 'EL8', 'Fedora' )
+  when: waco_platform in ('EL9', 'EL8', 'Fedora')
   register: packer_installed
 
 - name: "Install Packer (EL 7)"
-  yum:
+  ansible.builtin.yum:
     name: "{{ packages }}"
   vars:
     packages:
@@ -28,7 +28,7 @@
 #   when: ansible_os_family == 'RedHat' and packer_installed is changed and wapa_disable_repo
 
 - name: "Install Packer (Ubuntu)"
-  apt:
+  ansible.builtin.apt:
     name:
       - packer
   become: true

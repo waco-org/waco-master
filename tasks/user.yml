@@ -1,9 +1,9 @@
 ---
 # Workstation as Code
-# Copyright Nicola Musatti 2020.
+# Copyright Nicola Musatti 2020 - 2022.
 
 - name: "Create the {{ user }} user"
-  user:
+  ansible.builtin.user:
     name: "{{ user }}"
     state: present
     password: '*'
@@ -11,7 +11,7 @@
   become: true
 
 - name: "Install user flatpak apps for user {{ user }}"
-  include_tasks:
+  ansible.builtin.include_tasks:
     file: flatpak.yml
   vars:
     flatpak_remote: flathub
@@ -23,7 +23,6 @@
   when: ansible_os_family == 'RedHat' and user_flatpak_apps | length > 0
 
 - name: "Install Rust for user {{ user }}"
-  include_tasks:
+  ansible.builtin.include_tasks:
     file: rust.yml
-  vars:
   when: user_has_rust

@@ -7,7 +7,7 @@
     - role: waco_org.waco_master
   vars:
     waco_packages:
-      - "{{ ( ansible_os_family == 'RedHat' ) | ternary('vim-X11', 'vim-gui-common') }}"
+      - "{{ (ansible_os_family == 'RedHat') | ternary('vim-X11', 'vim-gui-common') }}"
     waco_flatpak_apps:
       - org.musicbrainz.Picard
     waco_has_docker: true

@@ -1,18 +1,18 @@
 ---
 # Workstation as Code
-# Copyright Nicola Musatti 2020 - 2021.
+# Copyright Nicola Musatti 2020 - 2022.
 
-- name: Install system packages for Maven (EL 8, Fedora)
-  dnf:
+- name: Install system packages for Maven (EL 9, EL 8, Fedora)
+  ansible.builtin.dnf:
     name: "{{ packages }}"
   vars:
     packages:
       - unzip
   become: true
-  when: waco_platform == 'EL8' or waco_platform == 'Fedora'
+  when: waco_platform in ('EL9', 'EL8', 'Fedora')
 
 - name: Install system packages for Maven (EL 7)
-  yum:
+  ansible.builtin.yum:
     name: "{{ packages }}"
   vars:
     packages:
@@ -21,7 +21,7 @@
   when: waco_platform == 'EL7'
 
 - name: Install system packages for Maven (Ubuntu)
-  apt:
+  ansible.builtin.apt:
     name: "{{ packages }}"
   vars:
     packages:
@@ -30,7 +30,7 @@
   when: waco_platform == 'Ubuntu'
 
 - name: "Create base directories for Maven"
-  file:
+  ansible.builtin.file:
     dest: "{{ item }}"
     state: directory
     mode: 0755
@@ -41,7 +41,7 @@
     - "{{ waco_software_dir }}/maven"
 
 - name: Download the Maven archive
-  get_url:
+  ansible.builtin.get_url:
     dest: "{{ waco_software_dir }}/maven"
     url: "https://archive.apache.org/dist/maven/maven-3/{{ wamvn_version }}/binaries/apache-maven-{{ wamvn_version }}-bin.zip"
     mode: 0644
@@ -50,7 +50,7 @@
   delay: 3
 
 - name: Unpack the Maven archive
-  unarchive:
+  ansible.builtin.unarchive:
     src: "{{ waco_software_dir }}/maven/apache-maven-{{ wamvn_version }}-bin.zip"
     dest: "/opt"
     mode: 0755

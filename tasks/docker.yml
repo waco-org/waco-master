@@ -1,18 +1,18 @@
 ---
 # Workstation as Code
-# Copyright Nicola Musatti 2020.
+# Copyright Nicola Musatti 2020 - 2022.
 
 - name: Set compose version
-  set_fact:
+  ansible.builtin.set_fact:
     docker_compose_version: "{{ wado_compose_version }}"
   when: wado_compose_version is defined
 
 - name: Install Docker
-  include_role:
+  ansible.builtin.include_role:
     name: nmusatti.docker_ce
 
 - name: Create the docker user with userid 1000
-  user:
+  ansible.builtin.user:
     name: "{{ waco_docker_user }}"
     group: docker
     # password: '*'
@@ -23,7 +23,7 @@
   become: true
 
 - name: Create the docker user with a different userid
-  user:
+  ansible.builtin.user:
     name: "{{ waco_docker_user }}"
     group: docker
     state: present

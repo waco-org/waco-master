@@ -1,15 +1,15 @@
 ---
 # Workstation as Code
-# Copyright Nicola Musatti 2020 - 2021.
+# Copyright Nicola Musatti 2020 - 2022.
 
-- name: Install flatpak (EL 8, Fedora)
-  dnf:
+- name: Install flatpak (EL 9, EL 8, Fedora)
+  ansible.builtin.dnf:
     name: flatpak
   become: true
-  when: waco_platform in ( 'EL8', 'Fedora' )
+  when: waco_platform in ('EL9', 'EL8', 'Fedora')
 
 - name: Install system packages (EL 7)
-  yum:
+  ansible.builtin.yum:
     name: flatpak
   become: true
   when: waco_platform == 'EL7'
@@ -21,7 +21,7 @@
     flatpakrepo_url: "{{ flatpak_url }}"
     method: "{{ flatpak_method }}"
   become: true
-  become_user: "{{ ( flatpak_method == 'system' ) | ternary('root', flatpak_user) }}"
+  become_user: "{{ (flatpak_method == 'system') | ternary('root', flatpak_user) }}"
 
 - name: Install flatpaks from a remote
   community.general.flatpak:
@@ -30,7 +30,7 @@
     remote: "{{ flatpak_remote }}"
     method: "{{ flatpak_method }}"
   become: true
-  become_user: "{{ ( flatpak_method == 'system' ) | ternary('root', flatpak_user) }}"
+  become_user: "{{ (flatpak_method == 'system') | ternary('root', flatpak_user) }}"
   loop: "{{ flatpak_apps }}"
   loop_control:
     loop_var: flatpak_app
