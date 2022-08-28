@@ -15,7 +15,7 @@ jobs:
           - rockylinux9
           - rockylinux8
           - centos-stream9
-          - centos-stream8
+          # - centos-stream8
           - centos7
           - fedora36
           - fedora35
