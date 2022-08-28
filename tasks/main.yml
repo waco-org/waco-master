@@ -64,7 +64,7 @@
 
 - name: Install Python
   ansible.builtin.include_role:
-    name: waco-python
+    name: waco_org.waco_python
   when: waco_has_python
 
 - name: Install system packages (EL 9, EL 8, Fedora)
