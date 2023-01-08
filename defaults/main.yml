@@ -1,6 +1,6 @@
 ---
 # Workstation as Code
-# Copyright Nicola Musatti 2020 - 2021.
+# Copyright Nicola Musatti 2020 - 2023.
 
 
 # General settings
@@ -40,7 +40,7 @@ waco_has_grsync: false
 
 # Apache Maven
 waco_has_maven: false
-wamvn_version: 3.8.4
+wamvn_version: 3.8.7
 
 
 # Packer
@@ -68,14 +68,14 @@ wapy_system_venv_root_dir: "{{ waco_install_dir }}"
 waco_has_vagrant: false
 
 # The required Vagrant release
-wava_version: 2.2.19
+wava_version: 2.3.4
 
 
 # Virtualbox
 waco_has_virtualbox: false
 
 # The required VirtualBox major release
-wavb_release: 6.1
+wavb_release: 7.0
 
 # Explicitly specify the required package to install an earlier minor release
 wavb_package: ""
