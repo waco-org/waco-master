@@ -3,3 +3,4 @@ warn_list:  # or 'skip_list' to silence them completely
   - '305'  # Use shell only when shell functionality is required
   - 'role-name'
   - 'no-handler'
+  - args[module]

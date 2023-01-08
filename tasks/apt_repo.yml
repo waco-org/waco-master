@@ -1,6 +1,6 @@
 ---
 # Workstation as Code
-# Copyright Nicola Musatti 2022.
+# Copyright Nicola Musatti 2022 - 2023.
 
 # Ubuntu only
 
@@ -22,7 +22,7 @@
   ansible.builtin.apt_key:
     url: "{{ apt_key_url }}"
     keyring: "{{ apt_key_ring }}"
-    keyserver: "{{ apt_key_server }}"
+    # keyserver: "{{ apt_key_server }}"
     id: "{{ apt_key_id }}"
     state: present
   become: true
