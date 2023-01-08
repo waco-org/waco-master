@@ -1,6 +1,6 @@
 ---
 # Workstation as Code
-# Copyright Nicola Musatti 2020 - 2022.
+# Copyright Nicola Musatti 2020 - 2023.
 
 - name: Install deltarpm support (EL 8, Fedora)
   ansible.builtin.dnf:
@@ -25,10 +25,10 @@
     name: geerlingguy.repo-epel
   when: waco_platform in ('EL9', 'EL8', 'EL7')
 
-- name: Enable the PowerTools repository (EL 8)
+- name: Enable the PowerTools repository (EL 9, EL 8)
   ansible.builtin.include_tasks:
     file: powertools.yml
-  when: waco_platform == 'EL8'
+  when: waco_platform in ('EL9', 'EL8')
 
 - name: Install essential packages (Ubuntu)
   ansible.builtin.apt:
