@@ -15,7 +15,7 @@
     waco_has_dropbox: true
     waco_has_grsync: true
     waco_has_maven: true
-    wamvn_version: 3.8.4
+    wamvn_version: 3.8.7
     waco_has_packer: true
     waco_has_python: true
     wapy_source_versions:
@@ -31,4 +31,4 @@
       user:
         has_rust: true
         flatpak_apps:
-          - io.github.quodlibet.QuodLibet
+          - org.freac.freac

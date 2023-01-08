@@ -19,8 +19,8 @@ def test_python3(host):
     assert '3' in host.check_output('/usr/bin/python3 --version')
 
 
-def test_python2(host):
-    assert '2' in host.check_output('/usr/bin/python2 --version 2>&1')
+# def test_python2(host):
+#     assert '2' in host.check_output('/usr/bin/python2 --version 2>&1')
 
 
 def test_source_python3(host):

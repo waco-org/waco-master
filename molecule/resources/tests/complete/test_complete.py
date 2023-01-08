@@ -30,7 +30,7 @@ def test_flatpak_system(host):
 def test_flatpak_user(host):
     if not is_ubuntu(host):
         f = host.file('/home/user/.local/share/flatpak/app/'
-                      'io.github.quodlibet.QuodLibet')
+                      'org.freac.freac')
         assert f.is_directory
         assert f.user == 'user'
         assert f.group == 'user'
