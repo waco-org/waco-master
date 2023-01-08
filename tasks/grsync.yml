@@ -1,6 +1,6 @@
 ---
 # Workstation as Code
-# Copyright Nicola Musatti 2020 - 2022.
+# Copyright Nicola Musatti 2020 - 2023.
 
 - name: Enable the EPEL repository (EL 7)
   ansible.builtin.include_role:
@@ -12,26 +12,26 @@
     file: powertools.yml
   when: waco_platform == 'EL8'
 
-- name: Check whether the nmusatti/grsync repository is enabled
-  ansible.builtin.command: dnf copr list --enabled
-  register: grsync_enabled
-  check_mode: false
-  ignore_errors: true
-  changed_when: false
-  when: waco_platform == 'EL8'
+# - name: Check whether the nmusatti/grsync repository is enabled
+#   ansible.builtin.command: dnf copr list --enabled
+#   register: grsync_enabled
+#   check_mode: false
+#   ignore_errors: true
+#   changed_when: false
+#   when: waco_platform == 'EL8'
 
-- name: Enable the nmusatti/grsync repository
-  ansible.builtin.command: dnf copr -y enable nmusatti/grsync
-  become: true
-  when: waco_platform == 'EL8' and grsync_enabled.stdout.find('nmusatti/grsync') == - 1
+# - name: Enable the nmusatti/grsync repository
+#   ansible.builtin.command: dnf copr -y enable nmusatti/grsync
+#   become: true
+#   when: waco_platform == 'EL8' and grsync_enabled.stdout.find('nmusatti/grsync') == - 1
 
-- name: Install grsync (EL 8, Fedora)
+- name: Install grsync (EL 9, EL 8, Fedora)
   ansible.builtin.dnf:
     name:
       - grsync
     state: present
   become: true
-  when: waco_platform in ('EL8', 'Fedora')
+  when: waco_platform in ('EL9', 'EL8', 'Fedora')
 
 - name: Install grsync (EL 7)
   ansible.builtin.yum:
