@@ -1,25 +1,44 @@
 ---
 # Workstation as Code
-# Copyright Nicola Musatti 2020 - 2022.
+# Copyright Nicola Musatti 2020 - 2023.
 
-# EL 8 only
+# EL 9 & 8 only
 
-- name: Check whether the PowerTools repository is enabled
-  ansible.builtin.command: "grep -q 'enabled=1' /etc/yum.repos.d/{{ waco_powertools_file }}"
-  register: powertools_enabled
+# - name: Check whether the PowerTools repository is enabled
+#   ansible.builtin.command: "grep -q 'enabled=1' /etc/yum.repos.d/{{ waco_powertools_file }}"
+#   register: powertools_enabled
+#   check_mode: false
+#   ignore_errors: true
+#   changed_when: false
+
+# - name: Install DNF plugins
+#   ansible.builtin.dnf:
+#     name:
+#       - dnf-plugins-core
+#     state: present
+#   become: true
+#   when: powertools_enabled.rc != 0
+
+# - name: Enable the PowerTools repository
+#   ansible.builtin.command: "dnf config-manager --set-enabled {{ waco_powertools_name }}"
+#   become: true
+#   when: powertools_enabled.rc != 0
+
+- name: Install dnf-manager command
+  ansible.builtin.dnf:
+    name:
+      - dnf-command(config-manager)
+  become: true
+
+- name: Check if the CodeReady Builder repository is enabled
+  ansible.builtin.command: "/usr/bin/crb status"
+  register: crb_enabled
   check_mode: false
   ignore_errors: true
   changed_when: false
-
-- name: Install DNF plugins
-  ansible.builtin.dnf:
-    name:
-      - dnf-plugins-core
-    state: present
   become: true
-  when: powertools_enabled.rc != 0
 
-- name: Enable the PowerTools repository
-  ansible.builtin.command: "dnf config-manager --set-enabled {{ waco_powertools_name }}"
+- name: Enable the CodeReady Builder repository
+  ansible.builtin.command: "/usr/bin/crb enable"
   become: true
-  when: powertools_enabled.rc != 0
+  when: crb_enabled.stdout.find('enabled') == - 1
