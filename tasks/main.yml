@@ -1,6 +1,6 @@
 ---
 # Workstation as Code
-# Copyright Nicola Musatti 2020 - 2023.
+# Copyright Nicola Musatti 2020 - 2025.
 
 - name: Install deltarpm support (EL 8, Fedora)
   ansible.builtin.dnf:
@@ -11,24 +11,24 @@
   become: true
   when: waco_platform in ('EL8', 'Fedora')
 
-- name: Install deltarpm support (EL 7)
-  ansible.builtin.yum:
+- name: Install GnuPG 2 (EL 10)
+  ansible.builtin.dnf:
     name: "{{ packages }}"
   vars:
     packages:
-      - deltarpm
+      - gnupg2
   become: true
-  when: waco_platform in ('EL7')
+  when: waco_platform in ('EL10')
 
-- name: Enable the EPEL repository (EL 9, EL 8, EL 7)
+- name: Enable the EPEL repository (EL 10, EL 9, EL 8)
   ansible.builtin.include_role:
     name: geerlingguy.repo-epel
-  when: waco_platform in ('EL9', 'EL8', 'EL7')
+  when: waco_platform in ('EL10', 'EL9', 'EL8')
 
-- name: Enable the PowerTools repository (EL 9, EL 8)
+- name: Enable the PowerTools repository (EL 10, EL 9, EL 8)
   ansible.builtin.include_tasks:
     file: powertools.yml
-  when: waco_platform in ('EL9', 'EL8')
+  when: waco_platform in ('EL10', 'EL9', 'EL8')
 
 - name: Install essential packages (Ubuntu)
   ansible.builtin.apt:
@@ -67,21 +67,13 @@
     name: waco_org.waco_python
   when: waco_has_python
 
-- name: Install system packages (EL 9, EL 8, Fedora)
+- name: Install system packages (EL10, EL 9, EL 8, Fedora)
   ansible.builtin.dnf:
     name: "{{ packages }}"
   vars:
     packages: "{{ waco_packages }}"
   become: true
-  when: waco_platform in ('EL9', 'EL8', 'Fedora')
-
-- name: Install system packages (EL 7)
-  ansible.builtin.yum:
-    name: "{{ packages }}"
-  vars:
-    packages: "{{ waco_packages }}"
-  become: true
-  when: waco_platform == 'EL7'
+  when: waco_platform in ('EL10', 'EL9', 'EL8', 'Fedora')
 
 - name: Install system packages (Ubuntu)
   ansible.builtin.apt:
