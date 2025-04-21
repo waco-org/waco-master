@@ -6,7 +6,7 @@ waco_master
 An Ansible role that orchestrates the installation of several developer oriented tools by driving
 other roles. Supported distributions are the currently maintained releases of the Red Hat family and
 derivatives, and of the Ubuntu LTS variants. At this time tests are run on Rocky Linux 9, 
-Rocky Linux 8, CentOS 7, Fedora 37, Fedora 36, Fedora 35, Ubuntu 22.04, Ubuntu 20.04 and Ubuntu 18.04.
+CentOS Stream 10, CentOS Stream 9, Fedora 42, Fedora 41, Fedora 40, Ubuntu 24.04 and Ubuntu 22.04.
 
 The currently supported tools and applications are:
 
